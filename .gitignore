@@ -1,0 +1,11 @@
+/dcfrontend/.DS_Store
+/dcfrontend/.env
+/dcfrontend/node_modules/
+
+# React Router
+/dcfrontend/.react-router/
+/dcfrontend/build/
+
+
+# Python
+__pycache__/
