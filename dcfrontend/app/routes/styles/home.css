@@ -1,0 +1,14 @@
+.navlinks {
+    background-color: rgb(83, 92, 109);
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.about{
+    max-width: 60%;
+    justify-content: center;
+    background-color: rgb(213, 213, 213);
+}
