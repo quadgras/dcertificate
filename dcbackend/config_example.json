@@ -1,1 +1,4 @@
-{}
+{
+    "ENVIRONMENT":"development",
+    "SECRET_KEY":"##@mysecuritykey123"
+}
