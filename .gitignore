@@ -10,3 +10,5 @@
 # Python
 # ignore all pycache folders anywhere
 __pycache__/
+
+/instance_folder/
