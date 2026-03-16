@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import date
 import click
 from flask import current_app, g
 
@@ -33,3 +33,7 @@ def init_app(app):
 
     # adding the init_db command function to app
     app.cli.add_command(init_db)
+
+sqlite3.register_converter(
+    "date", lambda v: date.fromisoformat(v.decode())
+)
