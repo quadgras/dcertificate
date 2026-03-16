@@ -27,7 +27,7 @@ def recepient_register():
     print(username, password, display_name)
     if(not(username and password and display_name)):
         return {
-            "status": 0,
+            "success": False,
             "message": "One or more from username, "
                        "password & display_name missing "
                        "from POST request body."
@@ -43,15 +43,15 @@ def recepient_register():
         )
     except db.IntegrityError:
         return {
-            "status": 0,
-            "message": "username already exists."
+            "success": False,
+            "message": "Username already exists."
         }
     else:
         db.commit()
     
     return {
-        "status": 1,
-        "message": "user {} successfully registered.".format(username)
+        "success": True,
+        "message": "User {} successfully registered.".format(username)
     }
 
 @bp.post("/recepient/login")
