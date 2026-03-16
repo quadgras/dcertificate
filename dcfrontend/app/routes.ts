@@ -10,8 +10,8 @@ import
 
 export default [
     index("routes/home.jsx"),
-    // route("search-certificate", ""),
-    // route("certificate", ""),
+    route("search-certificate", "routes/search.jsx"),
+    // route("certificate/:cno", ""),
     // ...prefix("recepient", [
     //     route("login", ""),
     //     route("register", ""),
