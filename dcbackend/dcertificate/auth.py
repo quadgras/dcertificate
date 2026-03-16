@@ -24,7 +24,6 @@ def recepient_register():
     username = request.form.get("username") #request.json["username"]
     password = request.form.get("password")
     display_name = request.form.get("display_name")
-    print(username, password, display_name)
     if(not(username and password and display_name)):
         return {
             "success": False,
@@ -61,10 +60,45 @@ def recepient_login():
 
 @bp.post("/issuer/register")
 def issuer_register():
-
-    return {}
+    username = request.form.get("username")
+    password = request.form.get("password")
+    display_name = request.form.get("display_name")
+    if(not(username and password and display_name)):
+        return {
+            "success": False,
+            "message": "One or more from username, "
+                       "password & display_name missing "
+                       "from POST request body."
+        }
+    
+    db = get_db()
+    try:
+        db.execute(
+            "INSERT INTO issuer "
+            "(username, display_name, pasword)"
+            "VALUES (?, ?, ?)",
+            (username, display_name, generate_password_hash(password))
+        )
+    except db.IntegrityError:
+        return {
+            "success": False,
+            "message": "Username already exists."
+        }
+    else:
+        db.commit()
+    
+    return {
+        "success": True,
+        "message": "User {} successfully registered.".format(username)
+    }
 
 @bp.post("/issuer/login")
 def issuer_login():
 
     return {}
+
+def require_issuer_login():
+    pass
+
+def require_recepient_login():
+    pass
