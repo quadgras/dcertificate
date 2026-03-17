@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 import os, json
 import dcertificate.db as db
 import dcertificate.auth
@@ -40,6 +41,12 @@ def create_app():
     app.register_blueprint(dcertificate.auth.bp)
     app.register_blueprint(dcertificate.issuer.bp)
     app.register_blueprint(dcertificate.recepient.bp)
+
+    # adding CORS config
+    CORS(
+        app, supports_credentials=True,
+        origins=[app.config['FRONTEND_URL']]
+    )
 
     @app.get("/hi")
     def hi():
