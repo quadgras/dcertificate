@@ -1,5 +1,6 @@
 {
     "ENVIRONMENT":"development",
     "SECRET_KEY":"##@mysecuritykey123",
-    "FRONTEND_URL":"http://localhost:5123/"
+    "FRONTEND_URL":"http://localhost:5123/",
+    "JWT_EXPIRY_SEC":3600
 }

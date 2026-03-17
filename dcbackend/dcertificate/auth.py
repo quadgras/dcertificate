@@ -1,6 +1,6 @@
-from flask import (Blueprint, request, make_response, current_app)
+from flask import (Blueprint, request, make_response, current_app, g)
 from werkzeug.security import check_password_hash, generate_password_hash
-import jwt
+import jwt, functools, datetime
 from dcertificate.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
@@ -99,7 +99,9 @@ def recepient_login():
     })
     
     token = jwt.encode(
-        payload = {"username":username,"id":user['id']},
+        payload = {
+            "username":username,"id":user['id'],
+            "exp": datetime.datetime.now(tz=datetime.timezone.utc)+datetime.timedelta(seconds=current_app.config['JWT_EXPIRY_SEC'])},
         key = current_app.config['SECRET_KEY'],
         algorithm = "HS256"
     )
@@ -166,5 +168,48 @@ def issuer_login():
 def require_issuer_login():
     pass
 
-def require_recepient_login():
-    pass
+def require_recepient_login(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if('recepient_username' in g):
+            return view(**kwargs)
+        else:
+            return {
+                "success": False,
+                "message": "No recepient user logged in or token expired."
+            }
+    
+    return wrapped_view
+
+@bp.before_app_request
+def load_logged_in_user():
+    recepient_token = request.cookies.get('recepient_auth_token', None)
+    issuer_token = request.cookies.get('issuer_auth_token', None)
+
+    if recepient_token:
+        try:
+            recepient = jwt.decode(
+                jwt = recepient_token,
+                key = current_app.config['SECRET_KEY'],
+                algorithms = ["HS256"]
+            )
+        except jwt.ExpiredSignatureError:
+            # JWT expired
+            pass
+        else:
+            g.recepient_username = recepient['username']
+            g.recepient_id = recepient['id']
+
+    if issuer_token:
+        try:
+            recepient = jwt.decode(
+                jwt = issuer_token,
+                key = current_app.config['SECRET_KEY'],
+                algorithms = ["HS256"]
+            )
+        except jwt.ExpiredSignatureError:
+            # JWT expired
+            pass
+        else:
+            g.issuer_username = recepient['username']
+            g.issuer_id = recepient['id']
