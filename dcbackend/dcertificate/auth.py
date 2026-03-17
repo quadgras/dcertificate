@@ -108,10 +108,10 @@ def recepient_login():
 
     res.set_cookie(
         key = "recepient_auth_token",
-        value = token,  # setting JWT recommended
+        value = token,
         httponly = True,
         samesite = 'none',
-        secure = (current_app.config['ENVIRONMENT'] == 'production') # enforce https on production
+        secure = (current_app.config['ENVIRONMENT'] == 'production') # send only over https on production
     )
 
     return res
@@ -124,6 +124,19 @@ def recepient_logout():
     })
     res.delete_cookie('recepient_auth_token')
     return res
+
+def require_recepient_login(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if(g.recepient_username):
+            return view(**kwargs)
+        else:
+            return {
+                "success": False,
+                "message": "No recepient user logged in or token expired."
+            }
+    
+    return wrapped_view
 
 @bp.post("/issuer/register")
 def issuer_register():
@@ -162,21 +175,79 @@ def issuer_register():
 
 @bp.post("/issuer/login")
 def issuer_login():
+    try:
+        username = request.json["username"]
+        password = request.json["password"]
+    except KeyError:
+        return {
+            "success": False,
+            "message": "Keys: username or password "
+                       "is missing from request data."
+        }
+    
+    db = get_db()
+    user = db.execute(
+        "SELECT * FROM issuer "
+        "WHERE username = ?;",
+        (username,)
+    ).fetchone()
 
-    return {}
+    if(not user):
+        return {
+            "success": False,
+            "message": "Username {} not found.".format(username)
+        }
+    
+    if(not check_password_hash(user['pasword'], password)):
+        return {
+            "success": False,
+            "message": "Invalid password."
+        }
+    
+    # At this stage, user is valid.
+    # Hence granting access.
 
-def require_issuer_login():
-    pass
+    res = make_response({
+        "success": True,
+        "message": "User logged in successfully."
+    })
+    
+    token = jwt.encode(
+        payload = {
+            "username":username,"id":user['id'],
+            "exp": datetime.datetime.now(tz=datetime.timezone.utc)+datetime.timedelta(seconds=current_app.config['JWT_EXPIRY_SEC'])},
+        key = current_app.config['SECRET_KEY'],
+        algorithm = "HS256"
+    )
 
-def require_recepient_login(view):
+    res.set_cookie(
+        key = "issuer_auth_token",
+        value = token,
+        httponly = True,
+        samesite = 'none',
+        secure = (current_app.config['ENVIRONMENT'] == 'production')
+    )
+
+    return res
+
+@bp.post("/issuer/logout")
+def issuer_logout():
+    res = make_response({
+        "success":True,
+        "message":"Logged out any active login."
+    })
+    res.delete_cookie('issuer_auth_token')
+    return res
+
+def require_issuer_login(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if('recepient_username' in g):
+        if(g.issuer_username):
             return view(**kwargs)
         else:
             return {
                 "success": False,
-                "message": "No recepient user logged in or token expired."
+                "message": "No issuer user logged in or token expired."
             }
     
     return wrapped_view
