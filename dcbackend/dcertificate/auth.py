@@ -1,5 +1,6 @@
 from flask import (Blueprint, request, make_response, current_app)
 from werkzeug.security import check_password_hash, generate_password_hash
+import jwt
 from dcertificate.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
@@ -97,9 +98,15 @@ def recepient_login():
         "message": "User logged in successfully."
     })
     
+    token = jwt.encode(
+        payload = {"username":username,"id":user['id']},
+        key = current_app.config['SECRET_KEY'],
+        algorithm = "HS256"
+    )
+
     res.set_cookie(
         key = "recepient_auth_token",
-        value = user['username'],  # setting JWT recommended
+        value = token,  # setting JWT recommended
         httponly = True,
         samesite = 'none',
         secure = (current_app.config['ENVIRONMENT'] == 'production') # enforce https on production
