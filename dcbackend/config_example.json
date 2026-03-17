@@ -1,4 +1,5 @@
 {
     "ENVIRONMENT":"development",
-    "SECRET_KEY":"##@mysecuritykey123"
+    "SECRET_KEY":"##@mysecuritykey123",
+    "FRONTEND_URL":"http://localhost:5123/"
 }
