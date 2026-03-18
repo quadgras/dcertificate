@@ -225,8 +225,9 @@ def issuer_login():
         key = "issuer_auth_token",
         value = token,
         httponly = True,
-        samesite = 'none',
-        secure = (current_app.config['ENVIRONMENT'] == 'production')
+        samesite = 'None',
+        secure = True,
+        path = "/"
     )
 
     return res
@@ -243,7 +244,7 @@ def issuer_logout():
 def require_issuer_login(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if(g.issuer_username):
+        if(g.get("issuer_username",None)):
             return view(**kwargs)
         else:
             return {
@@ -271,7 +272,7 @@ def load_logged_in_user():
             pass
         else:
             g.recepient_username = recepient['username']
-            g.recepient_id = recepient['id']
+            g.recepient_id = int(recepient['id'])
 
     if issuer_token:
         try:
@@ -285,4 +286,4 @@ def load_logged_in_user():
             pass
         else:
             g.issuer_username = recepient['username']
-            g.issuer_id = recepient['id']
+            g.issuer_id = int(recepient['id'])
