@@ -1,5 +1,5 @@
 .navlinks {
-    background-color: rgb(83, 92, 109);
+    background-color: var(--background2);
     padding: 10px;
     margin: 5px;
     color: white;

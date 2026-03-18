@@ -2,4 +2,5 @@ html{
   text-align: center;
   font-size: 11pt;
   font-family: monospace;
+  --background2: rgb(83, 92, 109);
 }

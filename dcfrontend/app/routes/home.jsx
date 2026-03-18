@@ -15,8 +15,8 @@ export default function Home() {
       <Link to="search-certificate" className={styles.navlinks}>Search Certificates</Link>
       <Link to="/" className={styles.navlinks}>Issuer Log In</Link>
       <Link to="/" className={styles.navlinks}>Issuer Registration</Link>
-      <Link to="/" className={styles.navlinks}>Recepient Log In</Link>
-      <Link to="/" className={styles.navlinks}>Recepient Registration</Link>
+      <Link to="/recepient/login" className={styles.navlinks}>Recepient Log In</Link>
+      <Link to="/recepient/register" className={styles.navlinks}>Recepient Registration</Link>
     </nav>
     <article className={styles.about}>
       <h1>Usecases</h1>

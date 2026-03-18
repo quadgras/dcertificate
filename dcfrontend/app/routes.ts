@@ -12,14 +12,18 @@ export default [
     index("routes/home.jsx"),
     route("search-certificate", "routes/search.jsx"),
     // route("certificate/:cno", ""),
-    // ...prefix("recepient", [
-    //     route("login", ""),
-    //     route("register", ""),
-    //     layout("", [
-    //         route("account", ""),
-    //         route("certificates", "")
-    //     ])
-    // ]),
+    ...prefix("recepient", [
+        route("login", "routes/recepient/login.jsx"),
+        route("register", "routes/recepient/register.jsx"),
+        layout("routes/recepient/account_layout.jsx", [
+            route("account", "routes/recepient/account.jsx"),
+            route("certificates", "routes/recepient/certificates.jsx")
+        ])
+        // route("account","routes/recepient/account_layout.jsx", [
+        //     index("routes/recepient/account.jsx"),
+        //     route("certificates", "routes/recepient/certificates.jsx")
+        // ])
+    ]),
     // ...prefix("issuer", [
     //     route("login", ""),
     //     route("register", ""),
