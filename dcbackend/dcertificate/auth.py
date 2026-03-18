@@ -110,8 +110,9 @@ def recepient_login():
         key = "recepient_auth_token",
         value = token,
         httponly = True,
-        samesite = 'none',
-        secure = (current_app.config['ENVIRONMENT'] == 'production') # send only over https on production
+        samesite = "None", #'Lax',
+        secure = True, #False, #(current_app.config['ENVIRONMENT'] == 'production') # send only over https on production
+        path = "/"
     )
 
     return res
@@ -128,13 +129,13 @@ def recepient_logout():
 def require_recepient_login(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if(g.recepient_username):
+        if(g.get("recepient_username", None)):
             return view(**kwargs)
         else:
             return {
                 "success": False,
                 "message": "No recepient user logged in or token expired."
-            }
+            }, 200
     
     return wrapped_view
 
@@ -256,7 +257,8 @@ def require_issuer_login(view):
 def load_logged_in_user():
     recepient_token = request.cookies.get('recepient_auth_token', None)
     issuer_token = request.cookies.get('issuer_auth_token', None)
-
+    
+    #for key in request.cookies: print(key, ":", request.cookies[key]) #DEBUG
     if recepient_token:
         try:
             recepient = jwt.decode(
