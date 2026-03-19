@@ -25,7 +25,7 @@ export async function clientAction({request}) {
         throw new Error(`Auth failed with: ${responsejson.message}`)
         //return responsejson; // if return is not redirect, the returned json or data can be accessed using useActionData() hook in UI component
 
-    return redirect("/recepient/certificates");
+    return redirect("/recepient/account");
     
     
 }
