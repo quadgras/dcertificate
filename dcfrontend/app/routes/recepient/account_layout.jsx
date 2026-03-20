@@ -37,6 +37,6 @@ export default function AccountLayoutPage({ loaderData }) {
     return <AccountLayout nav_items={{
         "Account": "/recepient/account",
         "Certificates": "/recepient/certificates"
-    }} title="Recepient" username={loaderData.userdetails.username}
+    }} title="Recepient" username={loaderData.userdetails.display_name}
         logoutHandlerURL="/recepient/account" />
 }
