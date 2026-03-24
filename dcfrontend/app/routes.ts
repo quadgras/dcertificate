@@ -12,6 +12,7 @@ export default [
     index("routes/home.jsx"),
     route("search-certificate", "routes/search.jsx"),
     // route("certificate/:cno", ""),
+    // route("user-manual", "")
     ...prefix("recepient", [
         route("login", "routes/recepient/login.jsx"),
         route("register", "routes/recepient/register.jsx"),

@@ -135,7 +135,7 @@ def require_recepient_login(view):
             return {
                 "success": False,
                 "message": "No recepient user logged in or token expired."
-            }, 200
+            }, 401
     
     return wrapped_view
 

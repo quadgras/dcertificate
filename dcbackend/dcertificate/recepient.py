@@ -1,6 +1,7 @@
 from flask import Blueprint, g
 from dcertificate.db import get_db
 from dcertificate.auth import require_recepient_login
+import time
 
 bp = Blueprint('recepient', __name__, url_prefix="/recepient")
 
@@ -42,4 +43,6 @@ def account_details():
         "WHERE id = ?;", (recepient_id,)
     ).fetchone()
 
-    return dict(details)
+    time.sleep(2)
+
+    return dict(details), 200

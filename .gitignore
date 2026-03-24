@@ -1,6 +1,15 @@
+# some frontend files
 /dcfrontend/.DS_Store
-/dcfrontend/.env
 /dcfrontend/node_modules/
+
+# ignore frontend config
+/dcfrontend/.env
+/dcfrontend/.env.development
+/dcfrontend/.env.production
+
+# ignore certificates for dev https
+/dcfrontend/dev_cert/
+/dcbackend/dev_cert/
 
 # React Router
 /dcfrontend/.react-router/
@@ -11,4 +20,5 @@
 # ignore all pycache folders anywhere
 __pycache__/
 
+# ignore backend data and config
 /instance_folder/
