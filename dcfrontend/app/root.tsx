@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation
 } from "react-router";
 
 import type { Route } from "./+types/root";
@@ -48,12 +49,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function HydrateFallback(){
-  return <h1>Loading ...</h1>;
-}
-
 export default function App() {
-  return <Outlet />;
+  const navigation = useNavigation();
+  const isNavigating = Boolean(navigation.location);
+  return isNavigating? <h1>Navigating ...</h1> : <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

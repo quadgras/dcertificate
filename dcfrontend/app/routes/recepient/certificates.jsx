@@ -3,6 +3,10 @@ import { useState } from "react";
 
 export async function clientLoader({}) {
 
+    const certificatesData = await fetch("https://localhost:5000/recepient/certificates-list",
+        {method:"POST",credentials:'include',headers:{'Content-Type': 'application/json'},
+            body:{}}
+    );
 
     return {
         certificates: [
