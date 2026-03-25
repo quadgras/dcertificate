@@ -1,5 +1,6 @@
 import Register from "../../components/register.jsx";
 import {redirect} from "react-router";
+import { backend_url } from "../../config.js";
 
 export async function clientAction({request}) {
     let formData = await request.formData();
@@ -8,7 +9,7 @@ export async function clientAction({request}) {
     // temporarily hard coding the api URL
     // while testing and learning.
     const response = await fetch(
-        'https://localhost:5000/auth/recepient/register', {
+        `${backend_url}/auth/recepient/register`, {
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body:requestJSON,

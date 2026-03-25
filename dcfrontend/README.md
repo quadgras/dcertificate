@@ -1,3 +1,26 @@
+# MY NOTES
+
+# Config handling
+- Config is loaded using environment variables.
+- The variables examples are kept in .env.example file.
+- In local machine, keep `.env.development` and `.env.production`
+  files. Vite uses them during `npm run dev` and `npm run build`
+  respectively.
+  Keep the files `.env.development` and `.env.production`
+  in `.gitignore`. Its not necessary, but recommended, especially
+  for production. And don't keep any secrets such as API keys in
+  frontend at all.
+- While deploying to a cloud such as vercel, cloudflare pages, netlify, etc.
+  set the environment variables (that are listed in .env.example) on the shell.
+- NOTE: You can also set the environment variables
+  on the local machine's shell,
+  but using `.env` files is more convenient option
+  that comes built-in with Vite.
+  If you don't mind commiting those files to git,
+  then, you can use them in production too.
+  
+
+# REACT ROUTER NOTES (PREBUILT)
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.

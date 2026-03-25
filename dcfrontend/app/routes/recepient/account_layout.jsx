@@ -1,8 +1,9 @@
 import { redirect } from "react-router";
-import AccountLayout from "../../components/accountlayout";
+import AccountLayout from "../../components/accountlayout.jsx";
+import { backend_url } from "../../config.js";
 
 export async function clientLoader({ params }) {
-    const response = await fetch("https://localhost:5000/recepient/account-details", {
+    const response = await fetch(`${backend_url}/recepient/account-details`, {
         method: 'POST',
         credentials: 'include'
     });

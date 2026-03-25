@@ -1,14 +1,13 @@
 import LogIn from "../../components/login";
 import { redirect } from "react-router";
+import { backend_url } from "../../config";
 
 export async function clientAction({request}) {
     let formData = await request.formData();
     let requestJSON = JSON.stringify(Object.fromEntries(formData));
-    //let requestJSON = ;
-    // temporarily hard coding the api URL
-    // while testing and learning.
+
     const response = await fetch(
-        'https://localhost:5000/auth/recepient/login', {
+        `${backend_url}/auth/recepient/login`, {
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body:requestJSON,

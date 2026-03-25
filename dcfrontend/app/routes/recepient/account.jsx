@@ -1,8 +1,9 @@
 import { Form, redirect } from "react-router";
+import { backend_url } from "../../config";
 
 export async function clientAction({request}) {
 
-    const response = await fetch("https://localhost:5000/auth/recepient/logout", {
+    const response = await fetch(`${backend_url}/auth/recepient/logout`, {
         method:'POST',
         credentials:'include'
     });
