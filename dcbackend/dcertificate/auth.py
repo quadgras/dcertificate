@@ -33,9 +33,9 @@ def recepient_register():
     #if(not(username and password and display_name)): # use instead of KeyError while dealing with formdata
         return {
             "success": False,
-            "message": "One or more from username, "
-                       "password & display_name missing "
-                       "from POST request body."
+            "debug": "One or more from username, "
+                     "password & display_name missing "
+                     "from POST request body."
         }, 400
     
     db = get_db()
@@ -68,8 +68,8 @@ def recepient_login():
     except KeyError:
         return {
             "success": False,
-            "message": "Keys: username or password "
-                       "is missing from request data."
+            "debug": "Keys: username or password "
+                     "is missing from request data."
         }, 400
     
     db = get_db()
@@ -150,9 +150,9 @@ def issuer_register():
     except KeyError:
         return {
             "success": False,
-            "message": "One or more from username, "
-                       "password & display_name missing "
-                       "from POST request body."
+            "debug": "One or more from username, "
+                     "password & display_name missing "
+                     "from POST request body."
         }, 400
     
     db = get_db()
@@ -184,8 +184,8 @@ def issuer_login():
     except KeyError:
         return {
             "success": False,
-            "message": "Keys: username or password "
-                       "is missing from request data."
+            "debug": "Keys: username or password "
+                     "is missing from request data."
         }, 400
     
     db = get_db()
