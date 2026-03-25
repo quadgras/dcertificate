@@ -97,7 +97,7 @@ def recepient_login():
     res = make_response({
         "success": True,
         "message": "User logged in successfully."
-    }), 200
+    }, 200)
     
     token = jwt.encode(
         payload = {
