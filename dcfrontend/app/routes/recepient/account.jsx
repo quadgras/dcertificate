@@ -4,7 +4,7 @@ import { backend_url } from "../../config";
 export async function clientAction({request}) {
 
     const response = await fetch(`${backend_url}/auth/recepient/logout`, {
-        method:'POST',
+        method:'DELETE',
         credentials:'include'
     });
 

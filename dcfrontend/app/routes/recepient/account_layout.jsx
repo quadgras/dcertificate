@@ -4,15 +4,14 @@ import { backend_url } from "../../config.js";
 
 export async function clientLoader({ params }) {
     const response = await fetch(`${backend_url}/recepient/account-details`, {
-        method: 'POST',
+        method: 'GET',
         credentials: 'include'
     });
 
     const responsejson = await response.json();
 
     if (!response.ok) return redirect('/recepient/login');
-
-    return { userdetails: responsejson };
+    return responsejson.data;
 }
 
 // Maybe, this is a layout page with no URL
@@ -38,6 +37,6 @@ export default function AccountLayoutPage({ loaderData }) {
     return <AccountLayout nav_items={{
         "Account": "/recepient/account",
         "Certificates": "/recepient/certificates"
-    }} title="Recepient" username={loaderData.userdetails.display_name}
+    }} title="Recepient" username={loaderData.display_name}
         logoutHandlerURL="/recepient/account" />
 }

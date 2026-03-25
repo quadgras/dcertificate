@@ -5,8 +5,7 @@ import { backend_url } from "../../config.js";
 export async function clientLoader({}) {
 
     const certificatesData = await fetch(`${backend_url}/recepient/certificates-list`,
-        {method:"POST",credentials:'include',headers:{'Content-Type': 'application/json'},
-            body:{}}
+        {method:"GET",credentials:'include'}
     );
 
     return {
