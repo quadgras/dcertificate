@@ -5,7 +5,7 @@ import time
 
 bp = Blueprint('recepient', __name__, url_prefix="/recepient")
 
-@bp.post("/certificates-list")
+@bp.get("/certificates-list")
 @require_recepient_login
 def certificates_list():
     time.sleep(1) #DEBUG
@@ -16,6 +16,9 @@ def certificates_list():
     # to include a bool type valid parameter.
     # A certificate is invalid
     # if validity expired or certificate revoked.
+    # If possible is SQL, then,
+    # also construct certificate_no
+    # and add it to a column/field.
     certificates = db.execute(
         "SELECT certificat.issue_date AS issue_date, "
         "certificat.certification_id AS certification_id, "
@@ -30,9 +33,12 @@ def certificates_list():
     # DEBUG
     print(certificates)
     
-    return certificates
+    return {
+        "success": True,
+        "data": certificates
+    }, 200
 
-@bp.post("/account-details")
+@bp.get("/account-details")
 @require_recepient_login
 def account_details():
     recepient_id = g.recepient_id
@@ -46,4 +52,7 @@ def account_details():
 
     time.sleep(1) #DEBUG
 
-    return dict(details), 200
+    return {
+        "success": True,
+        "data": dict(details)
+    }, 200
