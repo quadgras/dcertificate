@@ -1,6 +1,6 @@
 from flask import (Blueprint, request, make_response, current_app, g)
 from werkzeug.security import check_password_hash, generate_password_hash
-import jwt, functools, datetime
+import jwt, functools, datetime, time
 from dcertificate.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
@@ -36,7 +36,7 @@ def recepient_register():
             "message": "One or more from username, "
                        "password & display_name missing "
                        "from POST request body."
-        }
+        }, 400
     
     db = get_db()
     try:
@@ -50,17 +50,18 @@ def recepient_register():
         return {
             "success": False,
             "message": "Username already exists."
-        }
+        }, 400
     else:
         db.commit()
     
     return {
         "success": True,
         "message": "User {} successfully registered.".format(username)
-    }
+    }, 201
 
 @bp.post("/recepient/login")
 def recepient_login():
+    time.sleep(2) #DEBUG
     try:
         username = request.json["username"]
         password = request.json["password"]
@@ -69,7 +70,7 @@ def recepient_login():
             "success": False,
             "message": "Keys: username or password "
                        "is missing from request data."
-        }
+        }, 400
     
     db = get_db()
     user = db.execute(
@@ -82,13 +83,13 @@ def recepient_login():
         return {
             "success": False,
             "message": "Username {} not found.".format(username)
-        }
+        }, 401
     
     if(not check_password_hash(user['pasword'], password)):
         return {
             "success": False,
             "message": "Invalid password."
-        }
+        }, 401
     
     # At this stage, user is valid.
     # Hence granting access.
@@ -96,7 +97,7 @@ def recepient_login():
     res = make_response({
         "success": True,
         "message": "User logged in successfully."
-    })
+    }), 200
     
     token = jwt.encode(
         payload = {
@@ -117,13 +118,14 @@ def recepient_login():
 
     return res
 
-@bp.post("/recepient/logout")
+@bp.delete("/recepient/logout")
 def recepient_logout():
     res = make_response({
         "success":True,
         "message":"Logged out any active login."
-    })
+    }, 200)
     res.delete_cookie('recepient_auth_token')
+    time.sleep(1) #DEBUG
     return res
 
 def require_recepient_login(view):
@@ -151,7 +153,7 @@ def issuer_register():
             "message": "One or more from username, "
                        "password & display_name missing "
                        "from POST request body."
-        }
+        }, 400
     
     db = get_db()
     try:
@@ -165,14 +167,14 @@ def issuer_register():
         return {
             "success": False,
             "message": "Username already exists."
-        }
+        }, 400
     else:
         db.commit()
     
     return {
         "success": True,
         "message": "User {} successfully registered.".format(username)
-    }
+    }, 201
 
 @bp.post("/issuer/login")
 def issuer_login():
@@ -184,7 +186,7 @@ def issuer_login():
             "success": False,
             "message": "Keys: username or password "
                        "is missing from request data."
-        }
+        }, 400
     
     db = get_db()
     user = db.execute(
@@ -197,13 +199,13 @@ def issuer_login():
         return {
             "success": False,
             "message": "Username {} not found.".format(username)
-        }
+        }, 401
     
     if(not check_password_hash(user['pasword'], password)):
         return {
             "success": False,
             "message": "Invalid password."
-        }
+        }, 401
     
     # At this stage, user is valid.
     # Hence granting access.
@@ -211,7 +213,7 @@ def issuer_login():
     res = make_response({
         "success": True,
         "message": "User logged in successfully."
-    })
+    }, 200)
     
     token = jwt.encode(
         payload = {
@@ -232,12 +234,12 @@ def issuer_login():
 
     return res
 
-@bp.post("/issuer/logout")
+@bp.delete("/issuer/logout")
 def issuer_logout():
     res = make_response({
         "success":True,
         "message":"Logged out any active login."
-    })
+    }, 200)
     res.delete_cookie('issuer_auth_token')
     return res
 
@@ -250,7 +252,7 @@ def require_issuer_login(view):
             return {
                 "success": False,
                 "message": "No issuer user logged in or token expired."
-            }
+            }, 401
     
     return wrapped_view
 
@@ -259,7 +261,6 @@ def load_logged_in_user():
     recepient_token = request.cookies.get('recepient_auth_token', None)
     issuer_token = request.cookies.get('issuer_auth_token', None)
     
-    #for key in request.cookies: print(key, ":", request.cookies[key]) #DEBUG
     if recepient_token:
         try:
             recepient = jwt.decode(
