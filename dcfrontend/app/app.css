@@ -1,6 +1,16 @@
 html{
   text-align: center;
   font-size: 11pt;
-  font-family: monospace;
-  --background2: rgb(83, 92, 109);
+  /* font-family: monospace; */
+  --background2: rgb(69, 94, 139);
+  font-family: "Libertinus Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Libertinus Mono";
+  src: url("./assets/Libertinus_Mono/LibertinusMono-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
 }
