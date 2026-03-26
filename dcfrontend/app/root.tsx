@@ -10,6 +10,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import LoadingScreen from "./components/loading_screen.jsx";
 
 export function meta({}) {
   return [
@@ -52,7 +53,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const navigation = useNavigation();
   const isNavigating = Boolean(navigation.location);
-  return isNavigating? <h1>Navigating ...</h1> : <Outlet />;
+  //return isNavigating? <h1>Navigating ...</h1> : <Outlet />;
+  return <>
+  {isNavigating && <LoadingScreen />}
+  <Outlet />
+  </>;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

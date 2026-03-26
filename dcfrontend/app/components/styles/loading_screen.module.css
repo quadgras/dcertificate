@@ -1,0 +1,23 @@
+.loading_screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.267);
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+    100% {box-shadow: 0 0 0 30px #00000000}
+}
