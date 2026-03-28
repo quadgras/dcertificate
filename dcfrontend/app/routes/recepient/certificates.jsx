@@ -4,17 +4,14 @@ import { backend_url } from "../../config.js";
 
 export async function clientLoader({}) {
 
-    const certificatesData = await fetch(`${backend_url}/recepient/certificates-list`,
+    const res = await fetch(`${backend_url}/recepient/certificates-list`,
         {method:"GET",credentials:'include'}
     );
 
+    const responseJson = await res.json();
+
     return {
-        certificates: [
-            {"cno":"20251202-5-1", "display_name": "Abhijeet", "title":"Certificate1"},
-            {"cno":"20260320-50-1", "display_name": "Bill", "title":"Certificate2"},
-            {"cno":"20260320-50-1", "display_name": "Wanda", "title":"Certificate3"},
-            {"cno":"20260320-50-1", "display_name": "Raven", "title":"Certificate4"}
-        ]
+        certificates: responseJson.data
     };
     
 }

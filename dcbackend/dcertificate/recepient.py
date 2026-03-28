@@ -30,6 +30,7 @@ def certificates_list():
         (recepient_id,)
     ).fetchall()
 
+    certificates = [dict(c) for c in certificates]
     # DEBUG
     print(certificates)
     
