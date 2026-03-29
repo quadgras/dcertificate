@@ -12,6 +12,10 @@ export default function FlashNotification(){
     useEffect(()=>{
         function handleFlashEvent(event){
             setFlashData(event.detail);
+
+            // following sets the flash to disappear
+            // after a certain amount of time.
+            //setTimeout(()=>setFlashData(null), 10000);
         }
 
         document.addEventListener('flash-event', handleFlashEvent);
