@@ -1,5 +1,6 @@
 import { Form, redirect } from "react-router";
 import { backend_url } from "../../config";
+import { flash } from "../../lib/flash";
 
 export async function clientAction({request}) {
 
@@ -9,6 +10,8 @@ export async function clientAction({request}) {
     });
 
     if(!response.ok) throw new Error("Some error occured while logging out.");
+    
+    flash({data: {message:"Logged out successfully."}});
 
     return redirect("/recepient/login");
     

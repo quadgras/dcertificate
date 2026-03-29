@@ -12,6 +12,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import favicon from "./assets/favicon.jpg";
 import LoadingScreen from "./components/loading_screen.jsx";
+import FlashNotification from "./components/flash.jsx";
 
 export function meta({}) {
   return [
@@ -52,6 +53,7 @@ export default function App() {
   //return isNavigating? <h1>Navigating ...</h1> : <Outlet />;
   return <>
   {isNavigating && <LoadingScreen />}
+  <FlashNotification />
   <Outlet />
   </>;
 }

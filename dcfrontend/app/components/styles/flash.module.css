@@ -1,0 +1,9 @@
+.flash{
+    position: fixed;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background-color: var(--background2);
+    color: white;
+    padding: 10px;
+}
