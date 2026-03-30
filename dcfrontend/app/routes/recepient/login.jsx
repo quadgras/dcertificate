@@ -1,33 +1,22 @@
 import LogIn from "../../components/login";
 import { redirect } from "react-router";
-import { backend_url } from "../../config";
-import { flash } from "../../lib/flash";
+import { backend_request } from "../../lib/backend";
 
 export async function clientAction({request}) {
-    let formData = await request.formData();
-    let requestJSON = JSON.stringify(Object.fromEntries(formData));
+    const form_data = await request.formData();
+    const request_json = JSON.stringify(Object.fromEntries(form_data));
 
-    const response = await fetch(
-        `${backend_url}/auth/recepient/login`, {
-            method:'POST',
-            headers:{'Content-Type': 'application/json'},
-            body:requestJSON,
-            credentials:'include'
+    const response_json = await backend_request(
+        '/auth/recepient/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: request_json,
+            credentials: 'include'
         }
     );
-
-    //if(!response.ok)
-    //    throw new Error(`Error: ${response.status}`);
-
-    const responsejson = await response.json();
-    flash({data: {message:responsejson.message}});
-
-    // if(!responsejson.success)
-    //     //throw new Error(`Auth failed with: ${responsejson.message}`)
-        
-    //     //return responsejson; // if return is not redirect, the returned json or data can be accessed using useActionData() hook in UI component
-
-    return redirect("/recepient/account");
+    
+    if(response_json.success)
+        return redirect("/recepient/account");
     
     
 }

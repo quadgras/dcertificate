@@ -9,12 +9,14 @@ export default function FlashNotification(){
     // Returns a function
     // to unsubscribe to flash-event
     // on component unmount.
+    
     useEffect(()=>{
         function handleFlashEvent(event){
             setFlashData(event.detail);
 
             // following sets the flash to disappear
             // after a certain amount of time.
+
             //setTimeout(()=>setFlashData(null), 10000);
         }
 
@@ -32,7 +34,18 @@ export default function FlashNotification(){
     return(
         flashData && (
             <div className={styles.flash}>
-                {flashData.message}
+                {flashData.map(notification => {
+                    switch(notification.type){
+                        case 'success': 
+                            return <p>SUCCESS: {notification.message}</p>;
+                        case 'error': 
+                            return <p>ERROR: {notification.message}</p>;
+                        case 'info': 
+                            return <p>INFO: {notification.message}</p>;
+                        case 'warning': 
+                            return <p>WARNING: {notification.message}</p>;
+                    }
+                })}
                 <button onClick={dismiss}>Dismiss</button>
             </div>
         )

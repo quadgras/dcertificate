@@ -8,6 +8,10 @@ html{
   font-style: normal;
 }
 
+body{
+  margin: 0; 
+}
+
 @font-face {
   font-family: "Libertinus Mono";
   src: url("./assets/Libertinus_Mono/LibertinusMono-Regular.ttf");

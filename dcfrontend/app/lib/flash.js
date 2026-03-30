@@ -1,6 +1,6 @@
-export function flash({data}){
+export async function flash(notifications){
     const flash_event = new CustomEvent('flash-event', {
-        detail: data,
+        detail: notifications,
         bubbles: true
     });
 

@@ -82,7 +82,10 @@ def recepient_login():
     if(not user):
         return {
             "success": False,
-            "message": "Username {} not found.".format(username)
+            "message": "Username {} not found.".format(username),
+            "info": [
+                "New account can be registered."
+            ]
         }, 401
     
     if(not check_password_hash(user['pasword'], password)):
@@ -96,7 +99,7 @@ def recepient_login():
 
     res = make_response({
         "success": True,
-        "message": "User logged in successfully."
+        "data": {'username': username, 'display_name': user['display_name']}
     }, 200)
     
     token = jwt.encode(
