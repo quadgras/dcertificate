@@ -1,4 +1,5 @@
 import {Form, Link} from "react-router";
+import RootNavigaion from "./root_navigation";
 
 export default function LogIn({title, registerURL}){
     return <div>
@@ -11,5 +12,6 @@ export default function LogIn({title, registerURL}){
             <button type="submit">Submit</button>
         </Form>
         <p>Don't have an account? <Link to={registerURL}>Register</Link></p>
+        <RootNavigaion />
     </div>
 }

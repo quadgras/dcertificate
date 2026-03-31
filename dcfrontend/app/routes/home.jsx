@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import styles from "./styles/home.module.css";
+import RootNavigaion from "../components/root_navigation";
 
 export default function Home() {
   return <>
@@ -11,13 +11,6 @@ export default function Home() {
         certificates on the web.
       </p>
     </header>
-    <nav>
-      <Link to="search-certificate" className={styles.navlinks}>Search Certificates</Link>
-      <Link to="/" className={styles.navlinks}>Issuer Log In</Link>
-      <Link to="/" className={styles.navlinks}>Issuer Registration</Link>
-      <Link to="/recepient/login" className={styles.navlinks}>Recepient Log In</Link>
-      <Link to="/recepient/register" className={styles.navlinks}>Recepient Registration</Link>
-    </nav>
     <article className={styles.about}>
       <h1>Usecases</h1>
       <div className={styles.infoLayout}>
@@ -53,5 +46,6 @@ export default function Home() {
       available on Github
       under terms of MIT Licence.
     </footer>
+    <RootNavigaion />
   </>;
 }
