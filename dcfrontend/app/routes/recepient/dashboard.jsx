@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import AccountLayout from "../../components/accountlayout.jsx";
+import DashboardLayout from "../../components/dashboard_layout.jsx";
 import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader({ params }) {
@@ -33,8 +33,8 @@ export async function clientLoader({ params }) {
 
 // }
 
-export default function AccountLayoutPage({ loaderData }) {
-    return <AccountLayout nav_items={{
+export default function Dashboard({ loaderData }) {
+    return <DashboardLayout nav_items={{
         "Account": "/recepient/account",
         "Certificates": "/recepient/certificates"
     }} title="Recepient" username={loaderData.display_name}

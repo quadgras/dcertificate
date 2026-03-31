@@ -16,7 +16,7 @@ export default [
     ...prefix("recepient", [
         route("login", "routes/recepient/login.jsx"),
         route("register", "routes/recepient/register.jsx"),
-        layout("routes/recepient/account_layout.jsx", [
+        layout("routes/recepient/dashboard.jsx", [
             route("account", "routes/recepient/account.jsx"),
             route("certificates", "routes/recepient/certificates.jsx")
         ])

@@ -1,7 +1,7 @@
 import { Outlet, NavLink, Form } from "react-router";
 import styles from "./styles/accountlayout.module.css";
 
-export default function AccountLayout({ nav_items, title, username, logoutHandlerURL}) {
+export default function DashboardLayout({ nav_items, title, username, logoutHandlerURL}) {
     return <div className={styles.pagelayout}>
         <div><Outlet /></div>
         <nav className={styles.navbar}>
