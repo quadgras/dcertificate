@@ -21,5 +21,5 @@ export async function clientAction({request}) {
     
 }
 export default function LoginPage(){
-    return <LogIn title="Recepient Log In" registerURL="/recepient/register"/>
+    return <LogIn title="Recipient Log In" registerURL="/recepient/register"/>
 }

@@ -21,5 +21,5 @@ export async function clientAction({ request }) {
 }
 
 export default function RegisterPage() {
-    return <Register loginURL="/recepient/login" title="Recepient Registration" />;
+    return <Register loginURL="/recepient/login" title="Recipient Registration" />;
 }

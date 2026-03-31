@@ -35,5 +35,5 @@ def init_app(app):
     app.cli.add_command(init_db)
 
 sqlite3.register_converter(
-    "date", lambda v: date.fromisoformat(v.decode())
+    "date", lambda v: date.fromisoformat(v.decode()).strftime('%d %B %Y')
 )
