@@ -1,19 +1,15 @@
-import { Form, redirect } from "react-router";
-import { backend_url } from "../../config";
-import { flash } from "../../lib/flash";
+import { redirect } from "react-router";
+import { backend_request } from "../../lib/backend";
 
 export async function clientAction({request}) {
 
-    const response = await fetch(`${backend_url}/auth/recepient/logout`, {
-        method:'DELETE',
-        credentials:'include'
+    const response_json = await backend_request('/auth/recepient/logout', {
+        method: 'DELETE',
+        credentials: 'include'
     });
 
-    if(!response.ok) throw new Error("Some error occured while logging out.");
-    
-    flash({data: {message:"Logged out successfully."}});
-
-    return redirect("/recepient/login");
+    if(response_json.success)
+        return redirect("/recepient/login");
     
 }
 

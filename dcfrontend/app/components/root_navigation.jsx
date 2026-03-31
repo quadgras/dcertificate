@@ -15,7 +15,7 @@ export default function RootNavigaion() {
         </button>
         {open &&
             <nav className={styles.root_navigation}>
-                <h1>Root Navigation</h1>
+                <h1>Menu</h1>
                 <h2>Recepient</h2>
                 <Link to='/recepient/login'>Login</Link> <br/>
                 <Link to='/recepient/register'>Register</Link>

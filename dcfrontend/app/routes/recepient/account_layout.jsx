@@ -1,17 +1,17 @@
 import { redirect } from "react-router";
 import AccountLayout from "../../components/accountlayout.jsx";
-import { backend_url } from "../../config.js";
+import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader({ params }) {
-    const response = await fetch(`${backend_url}/recepient/account-details`, {
+    const response_json = await backend_request('/recepient/account-details', {
         method: 'GET',
         credentials: 'include'
     });
 
-    const responsejson = await response.json();
-
-    if (!response.ok) return redirect('/recepient/login');
-    return responsejson.data;
+    if(response_json.success)
+        return response_json.data;
+    else
+        return redirect('/recepient/login');
 }
 
 // Maybe, this is a layout page with no URL

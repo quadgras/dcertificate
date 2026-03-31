@@ -1,15 +1,14 @@
 import Register from "../../components/register.jsx";
 import {redirect} from "react-router";
-import { backend_url } from "../../config.js";
+import { backend_request } from "../../lib/backend.js";
 
 export async function clientAction({request}) {
+
     let formData = await request.formData();
     let requestJSON = JSON.stringify(Object.fromEntries(formData));
-    //let requestJSON = ;
-    // temporarily hard coding the api URL
-    // while testing and learning.
-    const response = await fetch(
-        `${backend_url}/auth/recepient/register`, {
+
+    const response_json = await backend_request(
+        '/auth/recepient/register', {
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body:requestJSON,
@@ -17,16 +16,8 @@ export async function clientAction({request}) {
         }
     );
 
-    if(!response.ok)
-        throw new Error(`Error: ${response.status}`);
-
-    const responsejson = await response.json();
-
-    if(!responsejson.success)
-        throw new Error(`Registration failed with: ${responsejson.message}`)
-        //return responsejson; // if return is not redirect, the returned json or data can be accessed using useActionData() hook in UI component
-
-    return redirect("/recepient/login");
+    if(response_json.success)
+        return redirect("/recepient/login");
 }
 
 export default function RegisterPage(){

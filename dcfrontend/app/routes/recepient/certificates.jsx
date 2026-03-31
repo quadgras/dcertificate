@@ -1,18 +1,18 @@
 import Certificate from "../../components/certificate.jsx";
 import { useState } from "react";
-import { backend_url } from "../../config.js";
+import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader({}) {
 
-    const res = await fetch(`${backend_url}/recepient/certificates-list`,
-        {method:"GET",credentials:'include'}
-    );
+    const response_json = await backend_request('/recepient/certificates-list', {
+        method: 'GET',
+        credentials: 'include'
+    });
 
-    const responseJson = await res.json();
-
-    return {
-        certificates: responseJson.data
-    };
+    if(response_json.success)
+        return response_json.data;
+    else
+        return [];
     
 }
 
@@ -41,7 +41,7 @@ export default function CertificatesPage({loaderData}){
     if(certificateData === ""){
         return (<>
             <h1>Certificates</h1>
-            {loaderData.certificates.map(
+            {loaderData.map(
                 certificate => <CertificatePreviewCard title={certificate.title} cno={certificate.cno} display_name={certificate.display_name} setCertificateData={setCertificateData}/>
             )}
         </>);
