@@ -3,7 +3,7 @@ import DashboardLayout from "../../components/dashboard_layout.jsx";
 import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader({ params }) {
-    const response_json = await backend_request('/recepient/account-details', {
+    const response_json = await backend_request('/recipient/account-details', {
         method: 'GET',
         credentials: 'include'
     });
@@ -11,7 +11,7 @@ export async function clientLoader({ params }) {
     if(response_json.success)
         return response_json.data;
     else
-        return redirect('/recepient/login');
+        return redirect('/recipient/login');
 }
 
 // Maybe, this is a layout page with no URL
@@ -20,7 +20,7 @@ export async function clientLoader({ params }) {
 
 // export async function clientAction({request}) {
 
-//     const response = await fetch("https://localhost:5000/auth/recepient/logout", {
+//     const response = await fetch("https://localhost:5000/auth/recipient/logout", {
 //         method:'POST',
 //         headers:{'Content-Type': 'application/json'},
 //         body:"{}",
@@ -29,14 +29,14 @@ export async function clientLoader({ params }) {
 
 //     if(!response.ok) throw new Error("Some error occured while logging out.");
 
-//     return redirect("/recepient/login");
+//     return redirect("/recipient/login");
 
 // }
 
 export default function Dashboard({ loaderData }) {
     return <DashboardLayout nav_items={{
-        "Account": "/recepient/account",
-        "Certificates": "/recepient/certificates"
-    }} title="Recepient" username={loaderData.display_name}
-        logoutHandlerURL="/recepient/account" />
+        "Account": "/recipient/account",
+        "Certificates": "/recipient/certificates"
+    }} title="Recipient" username={loaderData.display_name}
+        logoutHandlerURL="/recipient/account" />
 }

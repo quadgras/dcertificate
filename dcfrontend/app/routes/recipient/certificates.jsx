@@ -3,7 +3,7 @@ import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader() {
 
-    const response_json = await backend_request('/recepient/certificates-list', {
+    const response_json = await backend_request('/recipient/certificates-list', {
         method: 'GET',
         credentials: 'include'
     });

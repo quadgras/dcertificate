@@ -7,7 +7,7 @@ export async function clientAction({request}) {
     const request_json = JSON.stringify(Object.fromEntries(form_data));
 
     const response_json = await backend_request(
-        '/auth/recepient/login', {
+        '/auth/recipient/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: request_json,
@@ -16,10 +16,10 @@ export async function clientAction({request}) {
     );
     
     if(response_json.success)
-        return redirect("/recepient/account");
+        return redirect("/recipient/account");
     
     
 }
 export default function LoginPage(){
-    return <LogIn title="Recipient Log In" registerURL="/recepient/register"/>
+    return <LogIn title="Recipient Log In" registerURL="/recipient/register"/>
 }

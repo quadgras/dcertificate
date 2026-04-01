@@ -8,7 +8,7 @@ export async function clientAction({ request }) {
     let requestJSON = JSON.stringify(Object.fromEntries(formData));
 
     const response_json = await backend_request(
-        '/auth/recepient/register', {
+        '/auth/recipient/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: requestJSON,
@@ -17,9 +17,9 @@ export async function clientAction({ request }) {
     );
 
     if (response_json.success)
-        return redirect("/recepient/login");
+        return redirect("/recipient/login");
 }
 
 export default function RegisterPage() {
-    return <Register loginURL="/recepient/login" title="Recipient Registration" />;
+    return <Register loginURL="/recipient/login" title="Recipient Registration" />;
 }

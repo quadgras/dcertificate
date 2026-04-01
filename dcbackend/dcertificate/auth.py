@@ -23,8 +23,8 @@ bp = Blueprint('auth', __name__, url_prefix="/auth")
 # formdata may be used.
 
 
-@bp.post("/recepient/register")
-def recepient_register():
+@bp.post("/recipient/register")
+def recipient_register():
     try:
         username = request.json["username"] #request.form.get("username")
         password = request.json["password"]
@@ -41,7 +41,7 @@ def recepient_register():
     db = get_db()
     try:
         db.execute(
-            "INSERT INTO recepient "
+            "INSERT INTO recipient "
             "(username, display_name, pasword)"
             "VALUES (?, ?, ?)",
             (username, display_name, generate_password_hash(password))
@@ -59,8 +59,8 @@ def recepient_register():
         "message": "User {} successfully registered.".format(username)
     }, 201
 
-@bp.post("/recepient/login")
-def recepient_login():
+@bp.post("/recipient/login")
+def recipient_login():
     time.sleep(2) #DEBUG
     try:
         username = request.json["username"]
@@ -74,7 +74,7 @@ def recepient_login():
     
     db = get_db()
     user = db.execute(
-        "SELECT * FROM recepient "
+        "SELECT * FROM recipient "
         "WHERE username = ?;",
         (username,)
     ).fetchone()
@@ -111,7 +111,7 @@ def recepient_login():
     )
 
     res.set_cookie(
-        key = "recepient_auth_token",
+        key = "recipient_auth_token",
         value = token,
         httponly = True,
         samesite = "None", #'Lax',
@@ -121,25 +121,25 @@ def recepient_login():
 
     return res
 
-@bp.delete("/recepient/logout")
-def recepient_logout():
+@bp.delete("/recipient/logout")
+def recipient_logout():
     res = make_response({
         "success":True,
-        "message":"Logged out any active login."
+        "message":"Logged out."
     }, 200)
-    res.delete_cookie('recepient_auth_token')
+    res.delete_cookie('recipient_auth_token')
     time.sleep(1) #DEBUG
     return res
 
-def require_recepient_login(view):
+def require_recipient_login(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if(g.get("recepient_username", None)):
+        if(g.get("recipient_username", None)):
             return view(**kwargs)
         else:
             return {
                 "success": False,
-                "message": "No recepient user logged in or token expired."
+                "message": "No recipient user logged in or token expired."
             }, 401
     
     return wrapped_view
@@ -261,13 +261,13 @@ def require_issuer_login(view):
 
 @bp.before_app_request
 def load_logged_in_user():
-    recepient_token = request.cookies.get('recepient_auth_token', None)
+    recipient_token = request.cookies.get('recipient_auth_token', None)
     issuer_token = request.cookies.get('issuer_auth_token', None)
     
-    if recepient_token:
+    if recipient_token:
         try:
-            recepient = jwt.decode(
-                jwt = recepient_token,
+            recipient = jwt.decode(
+                jwt = recipient_token,
                 key = current_app.config['SECRET_KEY'],
                 algorithms = ["HS256"]
             )
@@ -275,12 +275,12 @@ def load_logged_in_user():
             # JWT expired
             pass
         else:
-            g.recepient_username = recepient['username']
-            g.recepient_id = int(recepient['id'])
+            g.recipient_username = recipient['username']
+            g.recipient_id = int(recipient['id'])
 
     if issuer_token:
         try:
-            recepient = jwt.decode(
+            recipient = jwt.decode(
                 jwt = issuer_token,
                 key = current_app.config['SECRET_KEY'],
                 algorithms = ["HS256"]
@@ -289,5 +289,5 @@ def load_logged_in_user():
             # JWT expired
             pass
         else:
-            g.issuer_username = recepient['username']
-            g.issuer_id = int(recepient['id'])
+            g.issuer_username = recipient['username']
+            g.issuer_id = int(recipient['id'])

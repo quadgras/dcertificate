@@ -1,15 +1,15 @@
 from flask import Blueprint, g
 from dcertificate.db import get_db
-from dcertificate.auth import require_recepient_login
+from dcertificate.auth import require_recipient_login
 import time
 
-bp = Blueprint('recepient', __name__, url_prefix="/recepient")
+bp = Blueprint('recipient', __name__, url_prefix="/recipient")
 
 @bp.get("/certificates-list")
-@require_recepient_login
+@require_recipient_login
 def certificates_list():
     time.sleep(1) #DEBUG
-    recepient_id = g.recepient_id
+    recipient_id = g.recipient_id
     db = get_db()
 
     # This query can be improved
@@ -26,8 +26,8 @@ def certificates_list():
         "FROM certificat "
         "LEFT JOIN certification "
         "ON certificat.certification_id = certification.id "
-        "WHERE certificat.recepient_id = ?;",
-        (recepient_id,)
+        "WHERE certificat.recipient_id = ?;",
+        (recipient_id,)
     ).fetchall()
 
     certificates = [dict(c) for c in certificates]
@@ -40,15 +40,15 @@ def certificates_list():
     }, 200
 
 @bp.get("/account-details")
-@require_recepient_login
+@require_recipient_login
 def account_details():
-    recepient_id = g.recepient_id
+    recipient_id = g.recipient_id
     db = get_db()
 
     details = db.execute(
         "SELECT id, username, display_name "
-        "FROM recepient "
-        "WHERE id = ?;", (recepient_id,)
+        "FROM recipient "
+        "WHERE id = ?;", (recipient_id,)
     ).fetchone()
 
     time.sleep(1) #DEBUG

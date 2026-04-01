@@ -4,7 +4,7 @@ import os, json
 import dcertificate.db as db
 import dcertificate.auth
 import dcertificate.issuer
-import dcertificate.recepient
+import dcertificate.recipient
 
 instance_folder = os.environ.get('INSTANCE_FOLDER', "")
 if(instance_folder == ""):
@@ -40,7 +40,7 @@ def create_app():
     # registring blueprints
     app.register_blueprint(dcertificate.auth.bp)
     app.register_blueprint(dcertificate.issuer.bp)
-    app.register_blueprint(dcertificate.recepient.bp)
+    app.register_blueprint(dcertificate.recipient.bp)
 
     # adding CORS config
     CORS(

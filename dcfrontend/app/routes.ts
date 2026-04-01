@@ -13,18 +13,14 @@ export default [
     route("search-certificate", "routes/search.jsx"),
     route("certificate/:certificate_no", "routes/certificate.jsx"),
     // route("user-manual", "")
-    ...prefix("recepient", [
-        route("login", "routes/recepient/login.jsx"),
-        route("register", "routes/recepient/register.jsx"),
-        layout("routes/recepient/dashboard.jsx", [
-            route("account", "routes/recepient/account.jsx"),
-            route("certificates", "routes/recepient/certificates.jsx"),
+    ...prefix("recipient", [
+        route("login", "routes/recipient/login.jsx"),
+        route("register", "routes/recipient/register.jsx"),
+        layout("routes/recipient/dashboard.jsx", [
+            route("account", "routes/recipient/account.jsx"),
+            route("certificates", "routes/recipient/certificates.jsx"),
             // route("certificate/:certificate_no", "routes/certificate.jsx")
         ])
-        // route("account","routes/recepient/account_layout.jsx", [
-        //     index("routes/recepient/account.jsx"),
-        //     route("certificates", "routes/recepient/certificates.jsx")
-        // ])
     ]),
     // ...prefix("issuer", [
     //     route("login", ""),

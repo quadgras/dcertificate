@@ -19,10 +19,10 @@ db = sqlite3.connect(
 )
 
 db.execute(
-    "INSERT INTO recepient "
+    "INSERT INTO recipient "
     "(username, display_name, pasword) VALUES "
     "(?, ?, ?);",
-    ("recepient1", "Recepient 1", generate_password_hash("recepient1_password"))
+    ("recipient1", "Recipient 1", generate_password_hash("recipient1_password"))
 )
 
 db.execute(
@@ -42,7 +42,7 @@ db.execute(
 
 db.execute(
     "INSERT INTO certificat "
-    "(recepient_id, certification_id, issue_date, validity_limit, revoke_message) VALUES "
+    "(recipient_id, certification_id, issue_date, validity_limit, revoke_message) VALUES "
     "(?,?,?,?,?), (?,?,?,?,?), (?,?,?,?,?);",
     (1,1,"2026-03-01",None, None, 1,1,"2026-03-10",None,None,
      1,2,"2026-03-15",None,None)

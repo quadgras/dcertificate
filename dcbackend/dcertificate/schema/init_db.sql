@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS issuer;
-DROP TABLE IF EXISTS recepient;
+DROP TABLE IF EXISTS recipient;
 DROP TABLE IF EXISTS certificat; /*certificate is a keyword*/
 DROP TABLE IF EXISTS certification;
 DROP TABLE IF EXISTS approval;
 
-CREATE TABLE recepient(
+CREATE TABLE recipient(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     display_name TEXT NOT NULL,
@@ -29,13 +29,13 @@ CREATE TABLE certification(
 );
 
 CREATE TABLE certificat(
-    recepient_id INTEGER NOT NULL,
+    recipient_id INTEGER NOT NULL,
     certification_id INTEGER NOT NULL,
     issue_date DATE NOT NULL,
     validity_limit INTEGER, /* No. of days or NULL for infinite */
     revoke_message TEXT, /* Not NULL indicates certificate has been revoked */
-    UNIQUE(recepient_id, certification_id, issue_date), /* On a given day, a candidate can receive only one certificate from a certification*/
-    FOREIGN KEY (recepient_id) REFERENCES recepient (id),
+    UNIQUE(recipient_id, certification_id, issue_date), /* On a given day, a candidate can receive only one certificate from a certification*/
+    FOREIGN KEY (recipient_id) REFERENCES recipient (id),
     FOREIGN KEY (certification_id) REFERENCES certification (id)
 );
 
