@@ -1,11 +1,7 @@
 @keyframes slideDownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-100px); /* Starts 100px below its final position */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0); /* Ends exactly where it belongs */
+    transform: translateY(-100px);
   }
 }
 
