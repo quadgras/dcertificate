@@ -31,10 +31,9 @@ CREATE TABLE certification(
 CREATE TABLE certificat(
     recipient_id INTEGER NOT NULL,
     certification_id INTEGER NOT NULL,
-    issue_date DATE NOT NULL,
-    validity_limit INTEGER, /* No. of days or NULL for infinite */
+    issue_time TEXT NOT NULL,
     revoke_message TEXT, /* Not NULL indicates certificate has been revoked */
-    UNIQUE(recipient_id, certification_id, issue_date), /* On a given day, a candidate can receive only one certificate from a certification*/
+    UNIQUE(recipient_id, certification_id, issue_time), /* On a given time (floor of second), a candidate can receive only one certificate from a certification*/
     FOREIGN KEY (recipient_id) REFERENCES recipient (id),
     FOREIGN KEY (certification_id) REFERENCES certification (id)
 );

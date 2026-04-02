@@ -14,6 +14,10 @@
     animation: slideDownFadeIn 0.25s linear forwards;
 }
 
+.invalid_certificate_card{
+  color: grey;
+}
+
 .certificate_list{
     display: flex;
     flex-direction: row;
