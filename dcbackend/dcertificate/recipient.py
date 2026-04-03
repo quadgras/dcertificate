@@ -2,14 +2,14 @@ from flask import Blueprint, g
 from dcertificate.db import get_db
 from dcertificate.auth import require_recipient_login
 import dcertificate.lib as lib
-import time
+#import time
 
 bp = Blueprint('recipient', __name__, url_prefix="/recipient")
 
 @bp.get("/certificates-list")
 @require_recipient_login
 def certificates_list():
-    time.sleep(1) #DEBUG
+    #time.sleep(1) #DEBUG
     recipient_id = g.recipient_id
     db = get_db()
 

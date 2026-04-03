@@ -1,6 +1,7 @@
 from flask import (Blueprint, request, make_response, current_app, g)
 from werkzeug.security import check_password_hash, generate_password_hash
-import jwt, functools, datetime, time
+import jwt, functools, datetime
+#import time
 from dcertificate.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix="/auth")
@@ -61,7 +62,7 @@ def recipient_register():
 
 @bp.post("/recipient/login")
 def recipient_login():
-    time.sleep(2) #DEBUG
+    #time.sleep(2) #DEBUG
     try:
         username = request.json["username"]
         password = request.json["password"]
@@ -128,7 +129,7 @@ def recipient_logout():
         "message":"Logged out."
     }, 200)
     res.delete_cookie('recipient_auth_token')
-    time.sleep(1) #DEBUG
+    #time.sleep(1) #DEBUG
     return res
 
 def require_recipient_login(view):
