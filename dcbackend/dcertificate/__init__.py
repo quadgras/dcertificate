@@ -50,9 +50,9 @@ def create_app():
         origins=[app.config['FRONTEND_URL']]
     )
 
-    @app.get("/hi")
-    def hi():
-        return {"success": True, "message": "Server active."}, 200
+    @app.get("/health-check")
+    def health_check():
+        return {"success": True, "message": "Server is active."}, 200
     
     @app.errorhandler(500)
     def error_500(error):
