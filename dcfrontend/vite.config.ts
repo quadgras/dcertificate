@@ -4,13 +4,13 @@ import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import fs from "fs";
 
-export default defineConfig({
+export default defineConfig(({mode}) => ({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-  server: {
+  server: mode === 'development'?{
     https: {
       key: fs.readFileSync("./dev_cert/localhost-key.pem"),
       cert: fs.readFileSync("./dev_cert/localhost.pem"),
     },
     port: 5173, // Or your preferred port
-  }
-});
+  }:{}
+}));
