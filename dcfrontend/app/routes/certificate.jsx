@@ -12,35 +12,19 @@ export async function clientLoader({params}){
             credentials: 'include'
         }
     );
-
-    // following is sample data while developing.
-    // use loaded data
-    // and if certificate not found
-    // show not found message.
-    // if expired,
-    // show expired message.
     
-    return {
-        success: true,
-        data: {
-            username: 'abhijeet',
-            'display_name': 'Abhijeet',
-            certificate_no: params.certificate_no,
-            issuer: 'ABC INC',
-            approvals: [],
-            issue_date: '2025-10-10',
-            pre_subject: 'It is certified that',
-            post_subject: 'is virgin and best programmer in university.'
-        }
-    };
+    return response_json;
 }
 
 export default function CertificatePage({loaderData}){
     const navigate = useNavigate();
 
-    return <>
-        <Certificate name={loaderData.data.display_name} cno={loaderData.data.certificate_no}/>
-        <p>Share Link: &lt;frontend-host&gt;/certificate/{loaderData.data.certificate_no}</p>
-        <button onClick={()=>navigate(-1)}>Go to last page</button>
-    </>;
+    if(loaderData && loaderData.success){
+        return <>
+            <Certificate data={loaderData.data} />
+            <button onClick={()=>navigate(-1)}>Go to last page</button>
+        </>;
+    } else {
+        return <p>Certificate does not exist.</p>;
+    }
 }

@@ -32,7 +32,7 @@ def details(certificate_id):
         "certification.title AS title, "
         "certification.pre_subject AS pre_subject, "
         "certification.post_subject AS post_subject, "
-        "certification.validity_limit AS validity_limit,"
+        "certification.validity_limit AS validity_limit, "
         "issuer.username AS issuer_username, "
         "issuer.display_name AS issuer_display_name, "
         "recipient.username AS recipient_username, "
