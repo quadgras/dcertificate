@@ -42,7 +42,7 @@ export default function Home() {
       &copy;2026, Abhijeet Verma
       <br />
       This is an educational project.
-      The <a href="https://github.com">source code</a> is
+      The <a href="https://github.com/quadgras/dcertificate">source code</a> is
       available on Github
       under terms of MIT Licence.
     </footer>
