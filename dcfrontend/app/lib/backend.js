@@ -9,7 +9,7 @@ export async function backend_request(route, params) {
     try {
 
         const response = await fetch(route_url, params);
-        const handled_responses = [200, 201, 400, 401, 403];
+        const handled_responses = [200, 201, 400, 401, 403, 404];
 
         if (handled_responses.includes(response.status)) {
 

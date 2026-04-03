@@ -52,6 +52,27 @@ def create_app():
 
     @app.get("/hi")
     def hi():
-        return {"success": True, "message": "Hi"}, 200
+        return {"success": True, "message": "Server active."}, 200
+    
+    @app.errorhandler(500)
+    def error_500(error):
+        return {
+            "success": False,
+            "message": "Internal server error."
+        }, 500
+    
+    @app.errorhandler(404)
+    def error_404(error):
+        # runs when you call flask.abort(404, description="")
+        # or flask/python generated errors.
+        # Does not run when
+        # you return {}, 404 from a view.
+        # This is defined to act as a fallback
+        # when 404 is not generated intentionally.
+
+        return {
+            "success": False,
+            "message": "Requested resource/URL not found."
+        }, 404
     
     return app

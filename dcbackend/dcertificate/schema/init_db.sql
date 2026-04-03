@@ -22,7 +22,8 @@ CREATE TABLE certification(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     issuer_id INTEGER NOT NULL,
     title TEXT NOT NULL,
-    detail TEXT NOT NULL,
+    pre_subject TEXT NOT NULL,  /*Text appearing before subject name on certificate.*/
+    post_subject TEXT NOT NULL, /*Text appearing after subject name on certificate.*/
     validity_limit INTEGER, /* No. of days. NULL means infinite */
     FOREIGN KEY (issuer_id) REFERENCES issuer (id)
     UNIQUE(issuer_id, title) /* Enforce unique title among certifications of a particular issuer */

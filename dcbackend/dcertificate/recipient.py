@@ -27,11 +27,9 @@ def certificates_list():
         "certification.validity_limit as validity_limit, "
         "certification.title AS title, "
         "issuer.display_name AS issuer_display_name "
-        "FROM (certificat "
-        "LEFT JOIN certification "
-        "ON certificat.certification_id = certification.id) "
-        "LEFT JOIN issuer "
-        "ON certification.issuer_id = issuer.id "
+        "FROM certificat "
+        "LEFT JOIN certification ON certificat.certification_id = certification.id "
+        "LEFT JOIN issuer ON certification.issuer_id = issuer.id "
         "WHERE certificat.recipient_id = ?;",
         (recipient_id,)
     ).fetchall()
@@ -46,9 +44,6 @@ def certificates_list():
             'issuer_display_name': row["issuer_display_name"],
             'valid': lib.is_certificate_valid(row["revoke_message"], row["issue_time"], row["validity_limit"])
         })
-
-    # DEBUG
-    print(certificate_previews)
     
     return {
         "success": True,
@@ -66,8 +61,6 @@ def account_details():
         "FROM recipient "
         "WHERE id = ?;", (recipient_id,)
     ).fetchone()
-
-    time.sleep(1) #DEBUG
 
     return {
         "success": True,

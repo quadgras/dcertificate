@@ -18,7 +18,7 @@ export async function clientLoader() {
 }
 
 function CertificatePreviewCard({ certificate }) {
-    const certificate_relative_url = `/certificate/${certificate.title}`;
+    const certificate_relative_url = `/certificate/${certificate.certificate_id}`;
 
     return <div className={certificate.valid?
         styles.certificate_card : `${styles.certificate_card} ${styles.invalid_certificate_card}`
@@ -77,7 +77,7 @@ export default function CertificatesPage({ loaderData }) {
         <label for='valid'> Valid certificates only</label>
 
         <div className={styles.certificate_list}>
-            {valid ? //<p>Only valid certificates will be shown. Functionality not implemented yet</p> :
+            {valid ? 
                 loaderData.map(certificate => (certificate.valid && <CertificatePreviewCard certificate={certificate} />)) :
                 loaderData.map(certificate => <CertificatePreviewCard certificate={certificate} />)
             }

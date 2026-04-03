@@ -37,12 +37,12 @@ db.execute(
 
 db.execute(
     "INSERT INTO certification "
-    "(issuer_id, title, detail, validity_limit) VALUES "
-    "(?, ?, ?, ?),(?, ?, ?, ?),(?, ?, ?, ?),(?, ?, ?, ?);",
-    (1, "COO 2025", "is designated Chief Operations Officer for one year.", 365,
-     1, "Innovator 2026", "did an innovation.", None,
-     2, "HOO 2026", "is assigned head of organization for two years.", 730,
-     3, "Guest Student", "is a guest student of our organization.", None)
+    "(issuer_id, title, pre_subject, post_subject, validity_limit) VALUES "
+    "(?, ?, ?, ?, ?),(?, ?, ?, ?, ?),(?, ?, ?, ?, ?),(?, ?, ?, ?, ?);",
+    (1, "COO 2025", "", "is designated Chief Operations Officer for one year.", 365,
+     1, "Innovator 2026", "This is to certify that", "did an innovation.", None,
+     2, "HOO 2026", "It is certified that", "is assigned head of organization for two years.", 730,
+     3, "Guest Student", "This certificate identifies","as a guest student of our organization.", None)
 )
 
 db.execute(
@@ -58,8 +58,8 @@ db.execute(
 db.execute(
     "INSERT INTO approval "
     "(issuer_id, certification_id) VALUES "
-    "(?,?), (?,?);",
-    (2,2, 3,2)
+    "(?,?), (?,?), (?,?), (?,?), (?,?), (?,?);",
+    (2,2, 3,2, 1,1, 1,2, 2,3, 3,4)
 )
 
 db.commit()
