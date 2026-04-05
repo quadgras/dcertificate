@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { backend_request } from "../../lib/backend.js";
 import { useEffect, useState } from "react";
 import styles from "./styles/certificates.module.css";
+import { SquareArrowOutUpRight } from "lucide-react";
 
 export async function clientLoader() {
 
@@ -29,7 +30,7 @@ function CertificatePreviewCard({ certificate }) {
             Issue Time: {certificate.issue_time} UTC<br />
             Certificate ID: {certificate.certificate_id} 
         </p>
-        <Link to={certificate_relative_url}>View</Link>
+        <Link to={certificate_relative_url}><SquareArrowOutUpRight/></Link>
     </div>;
 }
 

@@ -32,7 +32,8 @@
 .approvers{
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    column-gap: 30px;
+    row-gap:5px;
     flex-wrap: wrap;
     justify-content:center;
 }

@@ -22,14 +22,14 @@ export default [
             // route("certificate/:certificate_no", "routes/certificate.jsx")
         ])
     ]),
-    // ...prefix("issuer", [
-    //     route("login", ""),
-    //     route("register", ""),
-    //     layout("", [
-    //         route("account", ""),
-    //         route("certifications", ""),
-    //         route("certificates", ""),
-    //         route("approvals", "")
-    //     ])
-    // ])
+    ...prefix("issuer", [
+        route("login", "routes/issuer/login.jsx"),
+        route("register", "routes/issuer/register.jsx"),
+        layout("routes/issuer/dashboard.jsx", [
+            route("account", "routes/issuer/account.jsx"),
+            route("certifications", "routes/issuer/certifications.jsx"),
+            route("certificates", "routes/issuer/certificates.jsx"),
+            route("approvals", "routes/issuer/approvals.jsx")
+        ])
+    ])
 ] satisfies RouteConfig;

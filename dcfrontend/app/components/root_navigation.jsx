@@ -26,7 +26,7 @@ export default function RootNavigation() {
                 <Link to='/issuer/register'>Register</Link>
 
                 <h2>Other Options</h2>
-                <Link to=''>Search & Verify</Link> <br/> 
+                <Link to='/search-certificate'>Search & Verify</Link> <br/> 
                 <Link to=''>User Manual</Link> <br/>
                 <Link to='/'>Home</Link>
             </nav>
