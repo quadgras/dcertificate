@@ -126,7 +126,7 @@ def recipient_login():
 def recipient_logout():
     res = make_response({
         "success":True,
-        "message":"Logged out."
+        "message":"Recipient logged out successfully."
     }, 200)
     res.delete_cookie('recipient_auth_token')
     #time.sleep(1) #DEBUG
@@ -216,7 +216,10 @@ def issuer_login():
 
     res = make_response({
         "success": True,
-        "message": "User logged in successfully."
+        "data": {
+            "username": user['username'],
+            "display_name": user['display_name']
+        }
     }, 200)
     
     token = jwt.encode(
@@ -242,7 +245,7 @@ def issuer_login():
 def issuer_logout():
     res = make_response({
         "success":True,
-        "message":"Logged out any active login."
+        "message":"Issuer logged out successfully."
     }, 200)
     res.delete_cookie('issuer_auth_token')
     return res
