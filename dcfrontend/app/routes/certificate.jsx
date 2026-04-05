@@ -23,20 +23,17 @@ export default function CertificatePage({loaderData}){
 
     async function share_certificate(){
         const share_data = {
-            title: loaderData.data.certificate_id,
             url: `${import.meta.env.VITE_FRONTEND_URL}/certificate/${loaderData.data.certificate_id}`
         }
         
         try{
-            //await navigator.clipboard.writeText(`${import.meta.env.VITE_FRONTEND_URL}/certificate/${loaderData.data.certificate_id}`);
-            //await flash([{type:'info', message:'Certificate link copied to clipboard.'}]);
             await navigator.share(share_data);
         } catch(error) {
             try {
-                await navigator.clipboard.writeText(`${import.meta.env.VITE_FRONTEND_URL}/certificate/${loaderData.data.certificate_id}`);
+                await navigator.clipboard.writeText(share_data.url);
                 await flash([{type:'info', message:'Certificate link copied to clipboard.'}]);
             } catch (error) {
-                await flash([{type:'error', message:'Some error occured. Cannot share or copy to clipboard.'}]);
+                await flash([{type:'error', message:'Some error occured. Cannot share or copy.'}]);
             }
         }
     }

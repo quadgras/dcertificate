@@ -15,6 +15,6 @@ export async function clientAction({request}) {
 
 export default function AccountPage(){
     return <>
-        <h1>Account Page</h1>
+        <h1>Issuer Account Page</h1>
     </>;
 }

@@ -18,8 +18,7 @@ export default [
         route("register", "routes/recipient/register.jsx"),
         layout("routes/recipient/dashboard.jsx", [
             route("account", "routes/recipient/account.jsx"),
-            route("certificates", "routes/recipient/certificates.jsx"),
-            // route("certificate/:certificate_no", "routes/certificate.jsx")
+            route("certificates", "routes/recipient/certificates.jsx")
         ])
     ]),
     ...prefix("issuer", [
@@ -28,7 +27,8 @@ export default [
         layout("routes/issuer/dashboard.jsx", [
             route("account", "routes/issuer/account.jsx"),
             route("certifications", "routes/issuer/certifications.jsx"),
-            route("certificate", "routes/issuer/certificate.jsx"),
+            route("certification", "routes/issuer/certification.jsx"),
+            route("certificates", "routes/issuer/certificates.jsx"),
             route("approvals", "routes/issuer/approvals.jsx")
         ])
     ])
