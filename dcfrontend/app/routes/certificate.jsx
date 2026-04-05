@@ -23,8 +23,7 @@ export default function CertificatePage({loaderData}){
 
     async function share_certificate(){
         const share_data = {
-            title: 'Share Certificate',
-            text: `${loaderData.data.certificate_id}`,
+            title: loaderData.data.certificate_id,
             url: `${import.meta.env.VITE_FRONTEND_URL}/certificate/${loaderData.data.certificate_id}`
         }
         
