@@ -28,7 +28,7 @@ export default [
         layout("routes/issuer/dashboard.jsx", [
             route("account", "routes/issuer/account.jsx"),
             route("certifications", "routes/issuer/certifications.jsx"),
-            route("certificates", "routes/issuer/certificates.jsx"),
+            route("certificate", "routes/issuer/certificate.jsx"),
             route("approvals", "routes/issuer/approvals.jsx")
         ])
     ])
