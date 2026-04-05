@@ -16,6 +16,8 @@ export async function clientAction({request}) {
     );
     
     if(response_json.success)
+        localStorage.setItem('issuer_display_name', response_json.data.display_name);
+        localStorage.setItem('issuer_username', response_json.data.username);
         return redirect("/issuer/account");
     
     

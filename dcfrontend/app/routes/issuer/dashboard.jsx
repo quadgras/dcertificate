@@ -1,18 +1,14 @@
 import { redirect } from "react-router";
 import DashboardLayout from "../../components/dashboard_layout.jsx";
-import { backend_request } from "../../lib/backend.js";
 
 export async function clientLoader({ params }) {
-    // const response_json = await backend_request('/issuer/account-details', {
-    //     method: 'GET',
-    //     credentials: 'include'
-    // });
 
-    // if(response_json.success)
-    //     return response_json;
-    // else
-    //     return redirect('/issuer/login');
-    return {data:{display_name:'Not Implemented'}};
+    const display_name = localStorage.getItem('issuer_display_name');
+    if(display_name === null)
+        return redirect('/issuer/login');
+    else
+        return {display_name: display_name};
+    
 }
 
 export default function Dashboard({ loaderData }) {
@@ -21,6 +17,6 @@ export default function Dashboard({ loaderData }) {
         Certificates: "/issuer/certificates",
         Certifications: "/issuer/certifications",
         Approvals: "/issuer/approvals"
-    }} title="Issuer" username={loaderData.data.display_name}
+    }} title="Issuer" username={loaderData.display_name}
         logoutHandlerURL="/issuer/account" />
 }

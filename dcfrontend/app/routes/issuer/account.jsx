@@ -9,6 +9,8 @@ export async function clientAction({request}) {
     });
 
     if(response_json.success)
+        localStorage.removeItem('issuer_display_name');
+        localStorage.removeItem('issuer_username');
         return redirect("/issuer/login");
     
 }
