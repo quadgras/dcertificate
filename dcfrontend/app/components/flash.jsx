@@ -1,5 +1,6 @@
 import styles from "./styles/flash.module.css";
 import { useState, useEffect } from "react";
+import { CircleAlert, CircleCheck, CircleX, Info } from "lucide-react";
 
 export default function FlashNotification(){
     const [flashData, setFlashData] = useState(null);
@@ -37,13 +38,13 @@ export default function FlashNotification(){
                 {flashData.map(notification => {
                     switch(notification.type){
                         case 'success': 
-                            return <p>SUCCESS: {notification.message}</p>;
+                            return <p className={styles.message}><CircleCheck /> {notification.message}</p>;
                         case 'error': 
-                            return <p>ERROR: {notification.message}</p>;
+                            return <p className={styles.message}><CircleX /> {notification.message}</p>;
                         case 'info': 
-                            return <p>INFO: {notification.message}</p>;
+                            return <p className={styles.message}><Info /> {notification.message}</p>;
                         case 'warning': 
-                            return <p>WARNING: {notification.message}</p>;
+                            return <p className={styles.message}><CircleAlert /> {notification.message}</p>;
                     }
                 })}
                 <button onClick={dismiss}>Dismiss</button>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./styles/root_navigation.module.css";
 import { Link } from "react-router";
+import { Menu, X } from "lucide-react";
 
 export default function RootNavigation() {
     const [open, set_open] = useState(false);
@@ -11,7 +12,7 @@ export default function RootNavigation() {
 
     return <>
         <button className={styles.toggle} onClick={toggle}>
-            {open?'x':'='}
+            {open?<X/>:<Menu/>}
         </button>
         {open &&
             <nav className={styles.root_navigation}>
@@ -25,7 +26,7 @@ export default function RootNavigation() {
                 <Link to='/issuer/register'>Register</Link>
 
                 <h2>Other Options</h2>
-                <Link to=''>Verify Certificates</Link> <br/> 
+                <Link to=''>Search & Verify</Link> <br/> 
                 <Link to=''>User Manual</Link> <br/>
                 <Link to='/'>Home</Link>
             </nav>
