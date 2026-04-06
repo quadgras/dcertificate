@@ -40,7 +40,8 @@ def approvals_list():
         "FROM approval "
         "LEFT JOIN certification ON certification.id = approval.certification_id "
         "LEFT JOIN issuer ON issuer.id = certification.issuer_id "
-        "WHERE approval.issuer_id = ?;",
+        "WHERE approval.issuer_id = ?"
+        "AND approval.issuer_id != issuer.id;",  # Not listing own certificates' approvals
         (issuer_id,)
     ).fetchall()
 
