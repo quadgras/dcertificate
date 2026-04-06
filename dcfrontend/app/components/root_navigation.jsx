@@ -27,7 +27,7 @@ export default function RootNavigation() {
 
                 <h2>Other Options</h2>
                 <Link to='/search-certificate'>Search & Verify</Link> <br/> 
-                <Link to=''>User Manual</Link> <br/>
+                <Link to='/user-manual'>User Manual</Link> <br/>
                 <Link to='/'>Home</Link>
             </nav>
         }

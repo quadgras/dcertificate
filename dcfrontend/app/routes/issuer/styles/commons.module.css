@@ -1,0 +1,15 @@
+.card{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: min(500px, 90%);
+}
+
+.card_list{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}

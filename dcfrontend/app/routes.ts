@@ -12,7 +12,7 @@ export default [
     index("routes/home.jsx"),
     route("search-certificate", "routes/search.jsx"),
     route("certificate/:certificate_no", "routes/certificate.jsx"),
-    // route("user-manual", "")
+    route("user-manual", "routes/manual.jsx"),
     ...prefix("recipient", [
         route("login", "routes/recipient/login.jsx"),
         route("register", "routes/recipient/register.jsx"),
