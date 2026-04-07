@@ -17,7 +17,7 @@ import FlashNotification from "./components/flash.jsx";
 export function meta({}) {
   return [
     { title: "Dcertificate" },
-    { name: "description", content: "SaaS for issuing and receiving certificates on web." },
+    { name: "description", content: "Web application for issuing, approving and receiving digital certificates." },
   ];
 }
 

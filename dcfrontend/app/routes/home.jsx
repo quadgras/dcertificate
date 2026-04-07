@@ -6,9 +6,9 @@ export default function Home() {
     <header>
       <h1>DCERTIFICATE</h1>
       <p>
-        Software as a Service (SaaS) platform
-        to issue, manage and receive
-        certificates on the web.
+        Web application for 
+        issuing, approving and recieving
+        digital certificates.
       </p>
     </header>
     <article className={styles.about}>
