@@ -5,7 +5,7 @@ import { flash } from "../lib/flash.js";
 import { Share2, ArrowLeft } from "lucide-react";
 
 export async function clientLoader({params}){
-    const certificate_no = params.certificate_no
+    const certificate_no = params.certificate_id
 
     const response_json = await backend_request(
         `/certificate/details/${certificate_no}`,

@@ -1,0 +1,11 @@
+.auth_form{
+   display: flex;
+   flex-direction: column;
+   width: min(300px, 90%);
+   /* align-items: start; */
+   row-gap: 5px; 
+   padding: 10px;
+   margin: auto;
+   /* border: 1px solid black; */
+   border-radius: 10px;
+}

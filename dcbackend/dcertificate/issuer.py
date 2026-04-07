@@ -101,7 +101,7 @@ def certification_for_approval(certification_id:int):
 
     try:
         certification_id = int(certification_id)
-    except TypeError:
+    except ValueError:
         return {
             'success': False,
             'message': 'Invalid certification ID.',
@@ -168,7 +168,7 @@ def add_approval():
             }
         else:
             db.commit()
-            
+
             return {
                 'success': True,
                 'message': 'Approval added successfully.'

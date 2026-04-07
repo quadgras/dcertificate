@@ -25,7 +25,8 @@
     /* padding-left: 5px;
     border-left: 2px solid black; */
     padding: 10px;
-    background-color: rgb(83, 100, 103);
+    /* background-color: rgb(83, 100, 103); */
+    background: linear-gradient(rgb(61, 60, 60), var(--background2));
     color: white;
 }
 

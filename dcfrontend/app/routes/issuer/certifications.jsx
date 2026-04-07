@@ -1,5 +1,5 @@
 import {backend_request} from "../../lib/backend";
-import {Link, Form} from "react-router";
+import {Link} from "react-router";
 import styles from "./styles/commons.module.css";
 
 export async function clientLoader({params}){
@@ -20,10 +20,8 @@ function CertificationCard({certification}){
     return <div className={styles.card}>
         ID: {certification.id} <br/>
         Title: {certification.title} <br/>
-        <Form method="POST" action="/issuer/certification">
-            <input type="hidden" name="certification_id" value={certification.id}/>
-            <input type="submit" name="load" value="Edit" />
-        </Form>
+        <Link to={`/issuer/certification/${certification.id}`}>Edit</Link> <br/>
+        <Link to=''>Issue</Link>
     </div>;
 }
 
@@ -33,6 +31,6 @@ export default function Certifications({loaderData}){
         <div className={styles.card_list}>
             {loaderData.data.map((certification) => <CertificationCard certification={certification} />)}
         </div>
-        <Link to="/issuer/certification">Launch New Certification</Link>
+        <Link to="/issuer/certification/0">Launch New Certification</Link>
     </>);
 }

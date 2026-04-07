@@ -11,7 +11,7 @@ import
 export default [
     index("routes/home.jsx"),
     route("search-certificate", "routes/search.jsx"),
-    route("certificate/:certificate_no", "routes/certificate.jsx"),
+    route("certificate/:certificate_id", "routes/certificate.jsx"),
     route("user-manual", "routes/manual.jsx"),
     ...prefix("recipient", [
         route("login", "routes/recipient/login.jsx"),
@@ -27,7 +27,7 @@ export default [
         layout("routes/issuer/dashboard.jsx", [
             route("account", "routes/issuer/account.jsx"),
             route("certifications", "routes/issuer/certifications.jsx"),
-            route("certification", "routes/issuer/certification.jsx"),
+            route("certification/:id", "routes/issuer/certification.jsx"),
             route("certificates", "routes/issuer/certificates.jsx"),
             route("approvals", "routes/issuer/approvals.jsx")
         ])

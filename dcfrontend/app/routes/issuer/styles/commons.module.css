@@ -13,3 +13,12 @@
     justify-content: center;
     gap: 5px;
 }
+
+.simple_form{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: auto;
+    width: min(300px, 90%);
+}

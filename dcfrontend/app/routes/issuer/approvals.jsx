@@ -100,9 +100,9 @@ export default function Approvals({ loaderData }) {
             }
         </div>
         <div>
-            <h1>Add New Approval</h1>
+            <h1>Add Approval</h1>
             {(certification === null)?
-                <Form method="POST">
+                <Form method="POST" className={styles.simple_form}>
                     <label for="certification_id">Enter Certification ID</label>
                     <input name="certification_id" type="text" required="true"/>
                     <input name="fetch" type="submit" value="Fetch Details" />
