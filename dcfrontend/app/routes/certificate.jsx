@@ -45,6 +45,9 @@ export default function CertificatePage({loaderData}){
             <button onClick={share_certificate}><Share2 /></button>
         </>;
     } else {
-        return <p>Certificate does not exist.</p>;
+        return <>
+            <p>Certificate does not exist.</p>
+            <button onClick={()=>navigate(-1)}><ArrowLeft /></button>
+        </>;
     }
 }

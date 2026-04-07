@@ -1,5 +1,6 @@
 import RootNavigation from "../components/root_navigation.jsx";
 import {Form, redirect} from "react-router";
+import styles from "./issuer/styles/commons.module.css";
 
 export async function clientAction({request}) {
     const form_data = await request.formData();
@@ -10,7 +11,7 @@ export async function clientAction({request}) {
 export default function SearchPage(){
     return <>
         <h1>Search & Verify Certificates</h1>
-        <Form method='POST'>
+        <Form method='POST' className={styles.simple_form}>
             <label for="certificate_id">Certificate ID</label>
             <input type="text" name="certificate_id" />
             <button type="submit">Search Certificate</button>
