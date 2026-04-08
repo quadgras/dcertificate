@@ -1,7 +1,8 @@
-import { Form } from 'react-router';
+import { Form, redirect } from 'react-router';
 import { useState } from 'react';
 import styles from './styles/commons.module.css';
 import Certificate from '../../components/certificate';
+import { backend_request } from '../../lib/backend';
 
 export async function clientLoader({ params }) {
     // IDs start from 1
@@ -13,7 +14,7 @@ export async function clientLoader({ params }) {
 export async function clientAction({ request }) {
     const form_data = await request.formData();
     const request_form = Object.fromEntries(form_data);
-    const request_json = JSON.parse(request_form);
+    const request_json = JSON.stringify(request_form);
 
     // if (request_form.add) {
     //     // logic to add a new certification
@@ -29,6 +30,19 @@ export async function clientAction({ request }) {
     //     // of an existing certification.
     //     return { action: 'add' };
     // }
+
+    const response_json = await backend_request(
+        'issuer/certification',{
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: request_json,
+            credentials: 'include'
+        }
+    );
+
+    if(response_json.success)
+        redirect('issuer/certifications');
+
 
 }
 
@@ -67,7 +81,7 @@ export default function CertificationPage({ loaderData }) {
             <label for='post_subject'>Text after recepient's name</label>
             <input name='post_subject' type='text' required='true' onChange={update_preview} />
             <label for='validity_limit'>Validity (No. of days or 0 for infinite)</label>
-            <input name='title' type='number' required='true' defaultValue={0} />
+            <input name='validity_limit' type='number' required='true' defaultValue={0} />
             <input type='submit' value={(certification_id === 0)?'Launch':'Update'} />
         </Form>
         <h1>Preview</h1>
