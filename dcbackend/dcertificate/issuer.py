@@ -173,3 +173,43 @@ def add_approval():
                 'success': True,
                 'message': 'Approval added successfully.'
             }
+
+@bp.post("/certification")
+@require_issuer_login
+def add_certification():
+    request_json = request.json
+    issuer_id = g.issuer_id
+    db = get_db()
+
+    if('certification_id' in request_json):
+        # update request received
+        pass
+        return {}
+    else:
+        # add request received
+        validity_limit = int(request_json['validity_limit'])
+        if(validity_limit == 0): validity_limit = None
+
+        db.execute(
+            'INSERT INTO certification '
+            '(issuer_id, title, pre_subject, post_subject, validity_limit) '
+            'VALUES (?,?,?,?,?);',
+            (issuer_id, request_json['title'], request_json['pre_subject'],
+             request_json['post_subject'], validity_limit)
+        )
+
+        id = dict(db.execute(
+            'SELECT MAX(id) AS id FROM certification;'
+        ).fetchone())['id']
+
+        db.execute(
+            'INSERT INTO approval (issuer_id, certification_id) '
+            'VALUES (?,?);', (issuer_id, id)
+        )
+
+        db.commit()
+
+        return {
+            'success': True,
+            'message': f'Certification added, ID {id}'
+        }, 201
