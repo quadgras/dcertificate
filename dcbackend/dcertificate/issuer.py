@@ -15,7 +15,8 @@ def certifications_list():
     query_response = db.execute(
         "SELECT id, title "
         "FROM certification "
-        "WHERE issuer_id = ?;",
+        "WHERE issuer_id = ? "
+        "ORDER BY id ASC;",
         (issuer_id,)
     ).fetchall()
 
@@ -176,20 +177,54 @@ def add_approval():
 
 @bp.post("/certification")
 @require_issuer_login
-def add_certification():
+def certification():
     request_json = request.json
     issuer_id = g.issuer_id
     db = get_db()
 
+    validity_limit = int(request_json['validity_limit'])
+    if(validity_limit == 0): validity_limit = None
+    elif(validity_limit < 0): 
+        return {
+            'success': False,
+            'message': 'Validity must be an integer greater than or equal to 0.'
+        }, 400
+
+
     if('certification_id' in request_json):
         # update request received
-        pass
-        return {}
+        certification_id = int(request_json.get('certification_id'))
+
+        # issuer_id not required to make the update.
+        # But it is added for security.
+        # It ensures that another issuer 
+        # cannot update other's certifications.
+        # since issuer_id is extracted
+        # from auth token
+        # it can be trusted to be genuine.
+
+        db.execute(
+            'UPDATE certification '
+            'SET pre_subject = ?, '
+            'post_subject = ?, '
+            'title = ?, '
+            'validity_limit = ? '
+            'WHERE id = ? AND issuer_id = ?;',
+            (request_json.get('pre_subject', ''),
+             request_json.get('post_subject', ''),
+             request_json.get('title', ''), 
+             validity_limit, certification_id, issuer_id)
+        )
+
+        db.commit()
+
+        return {
+            'success': True,
+            'message': 'Record updated (if exists).'
+        }, 200
+    
     else:
         # add request received
-        validity_limit = int(request_json['validity_limit'])
-        if(validity_limit == 0): validity_limit = None
-
         db.execute(
             'INSERT INTO certification '
             '(issuer_id, title, pre_subject, post_subject, validity_limit) '
@@ -213,3 +248,40 @@ def add_certification():
             'success': True,
             'message': f'Certification added, ID {id}'
         }, 201
+    
+@bp.get("/certification-details/<certification_id>")
+@require_issuer_login
+def certification_details(certification_id:int):
+    issuer_id = g.issuer_id
+
+    try:
+        certification_id = int(certification_id)
+    except ValueError:
+        return {
+            'success': False,
+            'message': 'Invalid certification ID.',
+            'debug': 'certification_id must be int.'
+        }, 400
+    
+    db = get_db()
+
+    query_response = db.execute(
+        "SELECT * "
+        "FROM certification "
+        "WHERE id = ?;",
+        (certification_id,)
+    ).fetchall()
+
+    if(len(query_response) == 0):
+        return {
+            'success': False,
+            'message': 'Certification not found.'
+        }, 404
+    
+
+    data = dict(query_response[0])
+
+    return {
+        "success": True,
+        "data": data
+    }, 200
