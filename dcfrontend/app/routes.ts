@@ -28,7 +28,7 @@ export default [
             route("account", "routes/issuer/account.jsx"),
             route("certifications", "routes/issuer/certifications.jsx"),
             route("certification/:id", "routes/issuer/certification.jsx"),
-            route("certificates", "routes/issuer/certificates.jsx"),
+            route("certificates/:id", "routes/issuer/certificates.jsx"),
             route("approvals", "routes/issuer/approvals.jsx")
         ])
     ])
