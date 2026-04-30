@@ -22,7 +22,43 @@
 
 # TO - DO
 
-
+- Implement responsive design
+  to ensure that UI is functional
+  and has good UX
+  on both mobile and desktop view.
+- Make the UI good looking
+  in terms of appearance.
+- Report writing.
+- Optimizing routes to avoid unnecessary
+  complete page data validation.
+  DETAILS
+  Example - issuer/issue.jsx
+  When you fetch the recipient id
+  you don't want the whole page to revalidate
+  but it does.
+  Reason - when you make 
+  a state changing request to clientAction
+  like POST, UPDATE and DELETE via Form element
+  it react router revalidates the page data.
+  If you use GET request in Form element,
+  the form isn't sent to clientAction.
+  The page reloads with
+  the URL containing the form data.
+  Currently known options -
+  (a) use GET method in Form
+      when you don't want page revalidation.
+      Now obtain form details from URL
+      and process inside clientLoader.
+      This is simple but provides less flexibility.
+      One form is ok but what happens when 
+      multiple Forms can simultaneously handle page state?
+      How to avoid loading already loaded data
+      inside clientLoader?
+      (probably by identifying using 'action' key in submitted form
+       like in case of clientAction in issuer/issue.jsx )
+  (b) use some explicit method to 
+      prevent react router from revalidating
+      inside clientAction.
 
 # REACT ROUTER NOTES (PREBUILT)
 # Welcome to React Router!
