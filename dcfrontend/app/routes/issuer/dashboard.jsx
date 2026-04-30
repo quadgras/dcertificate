@@ -14,9 +14,9 @@ export async function clientLoader({ params }) {
 export default function Dashboard({ loaderData }) {
     return <DashboardLayout nav_items={{
         Account: "/issuer/account",
-        Certificates: "/issuer/certificates",
         Certifications: "/issuer/certifications",
-        Approvals: "/issuer/approvals"
+        Approvals: "/issuer/approvals",
+        Revoke: "/issuer/revoke"
     }} title="Issuer" username={loaderData.display_name}
         logoutHandlerURL="/issuer/account" />
 }

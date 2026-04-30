@@ -26,7 +26,7 @@ export default function Certificate({data}){
             <b>Certificate ID</b> {data.certificate_id} <br/>
             <b>Issued at</b> {data.issue_time} UTC
         </p>
-        <CircleCheck size="30"/>
+        <CircleCheck size="30" />
         <p>
             This certificate is issued and authentic 
             on <a href={import.meta.env.VITE_FRONTEND_URL}>Dcertificate Website</a>.

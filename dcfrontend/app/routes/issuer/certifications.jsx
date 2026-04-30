@@ -21,7 +21,7 @@ function CertificationCard({certification}){
         ID: {certification.id} <br/>
         Title: {certification.title} <br/>
         <Link to={`/issuer/certification/${certification.id}`}>Edit</Link> <br/>
-        <Link to=''>Issue</Link>
+        <Link to={`/issuer/issue/${certification.id}`}>Issue</Link>
     </div>;
 }
 

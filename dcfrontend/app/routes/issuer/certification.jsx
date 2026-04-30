@@ -31,10 +31,6 @@ export async function clientAction({ request }) {
     //     return { action: 'add' };
     // }
 
-    // if(request_json.load){
-    //     return {action: 'load', certification_id: request_json.certification_id};
-    // }
-
     // if (request_form.update) {
     //     // logic to update the details
     //     // of an existing certification.

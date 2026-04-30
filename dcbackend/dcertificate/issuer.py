@@ -187,7 +187,7 @@ def certification():
     elif(validity_limit < 0): 
         return {
             'success': False,
-            'message': 'Validity must be an integer greater than or equal to 0.'
+            'message': 'Validity must be 0 or a positive integer.'
         }, 400
 
 
@@ -260,7 +260,7 @@ def certification_details(certification_id:int):
         return {
             'success': False,
             'message': 'Invalid certification ID.',
-            'debug': 'certification_id must be int.'
+            'debug': 'certification_id must be positive integer.'
         }, 400
     
     db = get_db()
@@ -285,3 +285,108 @@ def certification_details(certification_id:int):
         "success": True,
         "data": data
     }, 200
+
+@bp.get("/recipient-details/<recipient_id>")
+@require_issuer_login
+def recipient_details(recipient_id:int):
+    try:
+        recipient_id = int(recipient_id)
+    except ValueError:
+        return {
+            "success": False,
+            "message": "Invalid recipient id.",
+            "debug": "Recipient ID must be a positive integer. Recieved non integer."
+        }, 400
+    
+    if(recipient_id < 1):
+        return {
+            "success": False,
+            "message": "Invalid recipient id.",
+            "debug": "Recipient ID must be a positive integer. Recieved value < 1."
+        }, 400
+
+    db = get_db()
+
+    details = db.execute(
+        "SELECT id, username, display_name "
+        "FROM recipient "
+        "WHERE id = ?;", (recipient_id,)
+    ).fetchone()
+
+    if(details == None):
+        return {
+            "success": False,
+            "message": f"Recipient with ID {recipient_id} not found."
+        }, 404
+    
+    return {
+        "success": True,
+        "data": dict(details)
+    }, 200
+
+@bp.post('/issue-certificate')
+@require_issuer_login
+def issue_certificate():
+    request_json = request.json
+    certification_id = request_json.get('certification_id')
+    recipient_id = request_json.get('recipient_id')
+    issuer_id = g.issuer_id
+
+    issue_time = lib.formatted_current_time()
+
+    # for more robust dev experience
+    # you can validate the request params here.
+
+    # check if this issuer id is the owner of certification id
+    # check if the recipient id exists
+    # if all conditions are true: add the certificate to database
+
+    db = get_db()
+
+    query1_response = db.execute(
+        'SELECT * FROM certification '
+        'WHERE id = ? AND issuer_id = ?;',
+        (certification_id, issuer_id)
+    ).fetchone()
+    
+    if(query1_response == None):
+        return {
+            'success': False,
+            'message': 'Certification ID: {} with issuer ID: {} not found.'.format(certification_id, issuer_id)
+        }, 404
+    
+    query2_response = db.execute(
+        'SELECT * FROM recipient '
+        'WHERE id = ?;',
+        (recipient_id,)
+    ).fetchone()
+
+    if(query2_response == None):
+        return {
+            'success': False,
+            'message': 'Recipient ID: {recipient_id} not found.'
+        }, 404
+    
+    # Execution reaches here implies
+    # all preliminary checks passed.
+    # Adding the certificate to database.
+
+    try:
+        query3_response = db.execute(
+            'INSERT INTO certificat '
+            '(recipient_id, certification_id, issue_time) '
+            'VALUES (?,?,?);',
+            (recipient_id, certification_id, issue_time)
+        )
+    except:
+        return {
+            'success': False,
+            'message': 'Some error occured while adding certificate to database.'
+        }, 500
+    else:
+        db.commit()
+
+        return {
+            'success': True,
+            'message': 'Certificate issued and added to database.'
+        }, 200
