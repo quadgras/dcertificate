@@ -12,7 +12,7 @@ export default function PasswordInput({name}){
     return <div className={styles.password_div}>
         <input className={styles.password_box} type={showPassword?"text":"password"} name={name} required/>
         <button className={styles.visibility_button} type='button' onClick={toggle_visibility}>
-            {showPassword?<Eye size={20} />:<EyeOff size={20}/>}
+            {showPassword?<Eye size={16} />:<EyeOff size={16}/>}
         </button>
     </div>;
 }
