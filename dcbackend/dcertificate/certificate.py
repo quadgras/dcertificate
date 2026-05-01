@@ -11,6 +11,7 @@ def details(certificate_id):
     except:
         return {
             "success": False,
+            "message": "Invalid certificate id.",
             "debug": "Error while parsing certificate_id. Ensure correct format."
         }, 400
 

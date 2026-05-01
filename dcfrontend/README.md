@@ -36,8 +36,7 @@
   When you fetch the recipient id
   you don't want the whole page to revalidate
   but it does.
-  Reason - when you make 
-  a state changing request to clientAction
+  Reason - when you make a state changing request to clientAction
   like POST, UPDATE and DELETE via Form element
   it react router revalidates the page data.
   If you use GET request in Form element,
@@ -59,6 +58,12 @@
   (b) use some explicit method to 
       prevent react router from revalidating
       inside clientAction.
+- When auth token expires,
+  redirect the user to correct login page.
+  Currently, there is no logic to gurantee this
+  and sometimes when token expires,
+  application gives un-specific errors
+  when token expires.
 
 # REACT ROUTER NOTES (PREBUILT)
 # Welcome to React Router!
