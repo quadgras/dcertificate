@@ -1,5 +1,5 @@
 import { backend_request } from "../../lib/backend";
-import { redirect, Form, useActionData } from "react-router";
+import { redirect, Form, useActionData, useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import styles from "./styles/commons.module.css";
 
@@ -50,6 +50,7 @@ export async function clientAction({request}){
 }
 
 export default function Certificates({loaderData}){
+    const navigate = useNavigate();
     const certification_id = loaderData.data.id;
     const certification_title = loaderData.data.title;
     const action_data = useActionData();
@@ -69,7 +70,8 @@ export default function Certificates({loaderData}){
         <h1>Issue Certificate</h1>
         {(function () {
             if(recipient !== null)
-                return <Form method="POST" className={styles.simple_form}>
+                return <>
+                <Form method="POST" className={styles.simple_form}>
                     <p><b>Preview</b></p>
                     <label for="certification_id">Certification ID</label>
                     <input type="text" name="certification_id" value={certification_id} readonly/>
@@ -80,7 +82,9 @@ export default function Certificates({loaderData}){
                     <label for="recipient_username">Recipient's Username</label>
                     <input type="text" name="recipient_username" value={recipient.username} readonly />
                     <input type="submit" name="issue" value="Issue Certificate" />
-                </Form>;
+                </Form>
+                <button onClick={() => navigate(-1)}>Back</button>
+                </>;
             else
                 return <Form method="POST" className={styles.simple_form}>
                     <label for="reciever_id">Recipient ID</label>

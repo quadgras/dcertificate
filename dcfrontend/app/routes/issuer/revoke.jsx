@@ -34,8 +34,6 @@ export async function clientAction({ request }) {
     }
     );
 
-    console.log(response_json);
-
     if (response_json.success)
         return redirect('/issuer/revoke');
 
