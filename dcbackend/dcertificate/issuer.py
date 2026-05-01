@@ -390,3 +390,72 @@ def issue_certificate():
             'success': True,
             'message': 'Certificate issued and added to database.'
         }, 200
+    
+@bp.post('/revoke-certificate')
+@require_issuer_login
+def revoke_certificate():
+
+    issuer_id = g.issuer_id
+    certificate_id = request.json.get('certificate_id')
+    revoke_message = request.json.get('revoke_message')
+
+    # for greater robustness and DX
+    # you can perform validation on request data.
+
+    # 1. check if certificate exists
+    # 2. check if issuer is authorized to revoke
+    #    i.e. is issuer the owner of certification
+    # if conditions 1 and 2 pass,
+    # add revoke message to database.
+
+    issue_time, certification_id, recipient_id = None, None, None
+    try:
+        issue_time, certification_id, recipient_id = lib.parse_certificate_id(certificate_id)
+    except:
+        return {
+            'success': False,
+            'message': 'Invalid certificate id.'
+        }, 400
+    
+    db = get_db()
+
+    query1_response = db.execute(
+        'SELECT * FROM certificat '
+        'WHERE issue_time = ? '
+        'AND certification_id = ? AND recipient_id = ?;',
+        (issue_time, certification_id, recipient_id)
+    ).fetchone()
+
+    if(query1_response == None):
+        return {
+            'success': False,
+            'message': f'Certificate {certificate_id} not found.'
+        }, 404
+    
+    query2_response = db.execute(
+        'SELECT * FROM certification '
+        'WHERE id = ?;',
+        (certification_id,)
+    ).fetchone()
+
+    if(query2_response['issuer_id'] != issuer_id):
+        return {
+            'success': False,
+            'message': f'Issuer ID {issuer_id} is not authorized to revoke the certificate {certificate_id}.'
+        }, 403
+    
+    db.execute(
+        'UPDATE certificat '
+        'SET revoke_message = ? '
+        'WHERE issue_time = ? '
+        'AND certification_id = ? AND recipient_id = ?;',
+        (revoke_message, issue_time, certification_id, recipient_id)
+    )
+
+    db.commit()
+
+    return {
+        'success': True,
+        'message': f'Certificate {certificate_id} revoked with message - {revoke_message}'
+    }, 200
+

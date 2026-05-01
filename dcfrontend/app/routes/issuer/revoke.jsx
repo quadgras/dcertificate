@@ -17,10 +17,27 @@ export async function clientLoader({ request }) {
         return response_json;
     }
 
-
 }
 
-export async function clientAction() {
+export async function clientAction({ request }) {
+
+    const form_data = await request.formData();
+    const request_form = Object.fromEntries(form_data);
+    const request_json = JSON.stringify(request_form);
+
+    const response_json = await backend_request(
+        'issuer/revoke-certificate', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: request_json
+    }
+    );
+
+    console.log(response_json);
+
+    if (response_json.success)
+        return redirect('/issuer/revoke');
 
 }
 

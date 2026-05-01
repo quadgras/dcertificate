@@ -28,6 +28,8 @@
   on both mobile and desktop view.
 - Make the UI good looking
   in terms of appearance.
+- Add confirm dialog in revoke page
+  as a part of good UX.
 - Report writing.
 - Optimizing routes to avoid unnecessary
   complete page data validation.
