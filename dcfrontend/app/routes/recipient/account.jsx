@@ -15,6 +15,7 @@ export async function clientAction({request}) {
 
 export default function AccountPage(){
     return <>
-        <h1>Account Page</h1>
+        <h1>Manage Account</h1>
+        <p>Page for future extension.</p>
     </>;
 }
