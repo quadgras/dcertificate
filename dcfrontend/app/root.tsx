@@ -10,21 +10,21 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import favicon from "./assets/favicon.jpg";
+import favicon from "./assets/logo.png";
 import LoadingScreen from "./components/loading_screen.jsx";
 import FlashNotification from "./components/flash.jsx";
 
 export function meta({}) {
   return [
     { title: "Dcertificate" },
-    { name: "description", content: "Web application for issuing, approving and receiving digital certificates." },
+    { name: "description", content: "Web application for issuing, approving and recieving digital certificates." },
   ];
 }
 
 export const links: Route.LinksFunction = () => [
   {
     rel: "icon",
-    type: "image/jpg",
+    type: "image/png",
     href: favicon
   }
 ];
