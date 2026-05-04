@@ -12,25 +12,3 @@
     justify-content: center;
     margin: 10px auto 10px auto;
 }
-
-.infoLayout{
-    display: grid;
-    grid-template-columns: 3fr 5fr;
-    column-gap: 20px;
-    row-gap: 10px;
-}
-
-.infoLayout>h2{
-    border-right: 2px solid black;
-    padding-right: 20px;
-    /* background-color: #b5d7ca;
-    padding-left: 10px;
-    padding-right: 10px; */
-    margin: 0;
-    text-align: right;
-}
-
-.infoLayout>p{
-    margin:0;
-    text-align: left;
-}

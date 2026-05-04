@@ -1,19 +1,40 @@
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
 .detail_list{
-    width: min(250px, 90%);
+    /* width: min(600px, 90%); */
     text-align: left;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .detail_element{
     border-radius: 5px;
-    background-color: whitesmoke;
+    background-color: beige;
+    padding: 20px;
 }
-.detail_title:hover{
-    background-color: antiquewhite;
+
+
+.detail_element:hover{
+    background-color: rgb(241, 225, 198);
 }
 
 .detail_title{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    font-size: 16pt;
+}
+
+.detail_content{
+    animation: slideDownFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    margin-top: 20px;
 }
 
