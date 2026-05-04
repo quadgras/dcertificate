@@ -1,11 +1,13 @@
 from flask import Blueprint
 from dcertificate.db import get_db
 import dcertificate.lib as lib
+import time
 
 bp = Blueprint('certificate', __name__, url_prefix='/certificate')
 
 @bp.get('/details/<certificate_id>')
 def details(certificate_id):
+    time.sleep(5)
     try:
         issue_time, certification_id, recipient_id = lib.parse_certificate_id(certificate_id)
     except:

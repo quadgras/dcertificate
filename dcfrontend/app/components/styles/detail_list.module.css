@@ -1,0 +1,19 @@
+.detail_list{
+    width: min(250px, 90%);
+    text-align: left;
+}
+
+.detail_element{
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+.detail_title:hover{
+    background-color: antiquewhite;
+}
+
+.detail_title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+

@@ -1,7 +1,7 @@
 .badge {
   transform-origin: center;
   transform-box: fill-box;
-  animation: rotateLogo 60s linear infinite;
+  animation: rotateLogo 5s linear infinite;
 }
 
 @keyframes rotateLogo {
