@@ -1,6 +1,6 @@
 import styles from "./styles/home.module.css";
 import RootNavigaion from "../components/root_navigation";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.svg";
 
 export default function Home() {
   return <>

@@ -10,7 +10,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import favicon from "./assets/logo.png";
+import favicon from "./assets/logo.svg";
 import LoadingScreen from "./components/loading_screen.jsx";
 import FlashNotification from "./components/flash.jsx";
 
