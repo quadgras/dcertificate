@@ -1,11 +1,11 @@
 import styles from "./styles/home.module.css";
 import RootNavigaion from "../components/root_navigation";
-import logo from "../assets/logo.svg";
+import DcertificateLogo from "../components/logo";
 
 export default function Home() {
   return <>
     <header>
-      <img src={logo} height="250px" />
+      <DcertificateLogo animation={true}/>
       <h1>DCERTIFICATE</h1>
       <p>
         Web application for 
