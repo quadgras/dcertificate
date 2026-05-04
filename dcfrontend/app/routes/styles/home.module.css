@@ -12,3 +12,8 @@
     justify-content: center;
     margin: 10px auto 10px auto;
 }
+
+.title_content{
+    padding: 20px;
+    /* background-color: black; */
+}

@@ -22,7 +22,7 @@
     right: 10px;
     z-index: 20;
     /* background: radial-gradient(white, rgb(210, 210, 210) 90%); */
-    background-color: rgb(37, 77, 132);
+    background-color: var(--accent-background);
     color: white;
     height: 50px;
     width: 50px;
@@ -36,5 +36,5 @@
 }
 
 .toggle:hover{
-    background-color: rgb(64, 111, 176);
+    background-color: var(--accent-background-hover) /*rgb(64, 111, 176)*/;
 }

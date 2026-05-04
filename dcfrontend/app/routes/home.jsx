@@ -5,7 +5,7 @@ import DetailList from "../components/detail_list";
 
 export default function Home() {
   return <>
-    <header>
+    <header className={styles.title_content}>
       <DcertificateLogo />
       <h1>DCERTIFICATE</h1>
       <p>
@@ -17,19 +17,19 @@ export default function Home() {
     <div className={styles.about}>
       <DetailList content={[
         [
-          'Issuers & Approvers',
+          <h2>Issuers & Approvers</h2>,
           `Individuals and organizations
             can create issuer-accounts to
             launch and approve certifications.`
         ],
         [
-          'Recipients',
+          <h2>Recipients</h2>,
           `Individuals and organizations
             can create recipient-account to
             receive certificates from issuers.`
         ],
         [
-          'Third Parties',
+          <h2>Third Parties</h2>,
           `Third parties (including those that
             don't have account on this platform)
             like employers, educational institutions, etc.

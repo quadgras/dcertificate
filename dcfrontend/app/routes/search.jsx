@@ -13,7 +13,7 @@ export default function SearchPage(){
         <h1>Search & Verify Certificates</h1>
         <Form method='POST' className={styles.simple_form}>
             <label for="certificate_id">Certificate ID</label>
-            <input type="text" name="certificate_id" />
+            <input type="text" name="certificate_id" required />
             <button type="submit">Search Certificate</button>
         </Form>
         <RootNavigation />

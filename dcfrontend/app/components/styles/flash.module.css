@@ -5,19 +5,28 @@
   }
 }
 
-.flash{
-    position: relative;
-    top:0;
-    left: 0;
-    right: 0;
-    background-color: var(--background2);
-    color: white;
-    padding: 10px;
-    z-index: 30;
-    animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.flash {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--accent-background);
+  color: var(--accent-color);
+  padding: 10px;
+  z-index: 30;
+  animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --accent-background-alias: var(--accent-background);
+  --accent-background-hover-alias: var(--accent-background-hover);
+  --accent-color-alias: var(--accent-color);
 }
 
-.message{
+.flash * {
+  --accent-background: var(--accent-background-hover-alias);
+  --accent-background-hover: var(--accent-background-alias);
+  --accent-color: var(--accent-color);
+}
+
+.message {
   display: flex;
   flex-direction: row;
   align-items: center;

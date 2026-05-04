@@ -3,9 +3,13 @@ html{
   font-size: 11pt;
   /* font-family: monospace; */
   --background2: rgb(69, 94, 139);
+  --accent-color: white;
+  --accent-background: rgb(59, 91, 94);
+  --accent-background-hover: rgb(86, 120, 124);
   font-family: "Libertinus Mono", monospace;
   font-weight: 400;
   font-style: normal;
+  font-size: 13pt;
 }
 
 body{
@@ -20,13 +24,17 @@ body{
 }
 
 button{
-  background-color: var(--background2);
+  background-color: var(--accent-background);
   padding: 5px;
-  color: white;
+  color: var(--accent-color);
   border-radius: 5px;
   font-family: 'Libertinus Mono', monospace;
-  font-size: 12pt;
-  border: 2px solid white;
+  font-size: inherit;
+  border: none/*2px solid white*/;
+}
+
+button:hover{
+  background-color: var(--accent-background-hover);
 }
 
 input{
@@ -35,9 +43,23 @@ input{
   background-color: whitesmoke;
   padding: 5px;
   font-family: 'Libertinus Mono', monospace;
-  font-size: 12pt;
+  font-size: inherit;
 }
 
 input:focus{
   outline: none;
+}
+
+h1{
+  font-size: 24pt;
+  font-weight: normal;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+h2{
+  font-size: 18pt;
+  font-weight: normal;
+  margin-top:10px;
+  margin-bottom:10px;
 }
