@@ -1,6 +1,12 @@
 import styles from "./styles/logo.module.css";
 
-export default function DcertificateLogo({ size = 250, animation = false }) {
+export default function DcertificateLogo({ 
+    size = 250, 
+    animation = false, 
+    margin = '5px',
+    padding = '10px',
+    backgroundColor = 'transparent'
+}) {
     return <svg
         width={size}
         height={size}
@@ -10,6 +16,7 @@ export default function DcertificateLogo({ size = 250, animation = false }) {
         xmlnsXlink="http://www.w3.org/1999/xlink"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:svg="http://www.w3.org/2000/svg"
+        style={{padding: padding, margin: margin, backgroundColor:backgroundColor}}
     >
         <defs id="defs1">
             <linearGradient id="linearGradient74">

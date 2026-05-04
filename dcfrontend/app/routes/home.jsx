@@ -5,7 +5,7 @@ import DcertificateLogo from "../components/logo";
 export default function Home() {
   return <>
     <header>
-      <DcertificateLogo animation={true}/>
+      <DcertificateLogo animation={true} />
       <h1>DCERTIFICATE</h1>
       <p>
         Web application for 
