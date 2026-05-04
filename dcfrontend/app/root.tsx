@@ -10,14 +10,14 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import favicon from "./assets/logo.svg";
+import favicon from "./assets/favicon.png";
 import LoadingScreen from "./components/loading_screen.jsx";
 import FlashNotification from "./components/flash.jsx";
 
 export function meta({}) {
   return [
     { title: "Dcertificate" },
-    { name: "description", content: "Web application for issuing, approving and recieving digital certificates." },
+    { name: "description", content: "Web application for issuing, approving and receiving digital certificates." },
   ];
 }
 

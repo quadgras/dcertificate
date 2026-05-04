@@ -9,7 +9,7 @@ export default function Home() {
       <h1>DCERTIFICATE</h1>
       <p>
         Web application for 
-        issuing, approving and recieving
+        issuing, approving and receiving
         digital certificates.
       </p>
     </header>
@@ -23,10 +23,10 @@ export default function Home() {
           launch and approve certifications.
         </p>
 
-        <h2>Recepients</h2>
+        <h2>Recipients</h2>
         <p>
           Individuals and organizations
-          can create recepient-account to
+          can create recipient-account to
           receive certificates from issuers.
         </p>
 
