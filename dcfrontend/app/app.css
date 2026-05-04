@@ -2,8 +2,8 @@ html{
   text-align: center;
   --background2: rgb(69, 94, 139);
   --accent-color: white;
-  --accent-background: black;
-  --accent-background-hover: rgb(41, 41, 41);
+  --accent-background: rgb(69, 94, 139);
+  --accent-background-hover: rgb(53, 71, 107);
   font-family: "Libertinus Mono", monospace;
   font-weight: 400;
   font-style: normal;
@@ -44,7 +44,18 @@ input{
   font-size: inherit;
 }
 
+input[type='submit']{
+  background-color: var(--accent-background);
+  color: var(--accent-color);
+  border: none;
+}
+
+input[type='submit']:hover{
+  background-color: var(--accent-background-hover);
+}
+
 input:focus{
+  border: 2px solid black;
   outline: none;
 }
 
