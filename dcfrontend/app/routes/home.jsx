@@ -6,7 +6,7 @@ import DetailList from "../components/detail_list";
 export default function Home() {
   return <>
     <header className={styles.title_content}>
-      <DcertificateLogo />
+      <DcertificateLogo size={200} />
       <h1>DCERTIFICATE</h1>
       <p>
         Web application for
@@ -37,14 +37,14 @@ export default function Home() {
             given by a recepient entity.`
         ]
       ]} />
-
-      <p>This is an educational project.
-      The <a href="https://github.com/quadgras/dcertificate">source code</a> is
-      available on Github
-      under terms of MIT Licence.</p>
+      <p>
+        This is an Educational Project.
+        The <a href="https://github.com/quadgras/dcertificate">source code</a> is available under MIT Licence.
+      </p>
     </div>
     <footer>
-      &copy;2026, Abhijeet Verma
+      {/* <a href="https://github.com/quadgras/dcertificate">Source Code</a> available under MIT Licence. <br/> */}
+      &copy;2026 Abhijeet Verma
     </footer>
     <RootNavigaion />
   </>;
