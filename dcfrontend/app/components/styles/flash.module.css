@@ -15,15 +15,18 @@
   padding: 10px;
   z-index: 30;
   animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --accent-background-alias: var(--accent-background);
+  /* --accent-background-alias: var(--accent-background);
   --accent-background-hover-alias: var(--accent-background-hover);
-  --accent-color-alias: var(--accent-color);
+  --accent-color-alias: var(--accent-color); */
 }
 
 .flash * {
-  --accent-background: var(--accent-background-hover-alias);
+  /* --accent-background: var(--accent-background-hover-alias);
   --accent-background-hover: var(--accent-background-alias);
-  --accent-color: var(--accent-color);
+  --accent-color: var(--accent-color); */
+  --accent-background: rgb(210, 210, 210);
+  --accent-background-hover: beige;
+  --accent-color: black;
 }
 
 .message {

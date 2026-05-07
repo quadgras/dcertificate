@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./styles/root_navigation.module.css";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 
 export default function RootNavigation() {
@@ -12,24 +12,27 @@ export default function RootNavigation() {
 
     return <>
         <button className={styles.toggle} onClick={toggle}>
-            {open?<X/>:<Menu/>}
+            {open ? <X /> : <Menu />}
         </button>
         {open &&
-            <nav className={styles.root_navigation}>
-                <h1>Menu</h1>
-                <h2>Recipient</h2>
-                <Link to='/recipient/login'>Login</Link> <br/>
-                <Link to='/recipient/register'>Register</Link>
+            <div className={styles.nav_container}>
+                <nav className={styles.root_navigation}>
+                    {/* <h1>Menu</h1>
+                    <hr style={{width:'300px'}} /> */}
+                    <h2>Recipient</h2>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/recipient/login'>Login</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/recipient/register'>Register</NavLink>
 
-                <h2>Issuer</h2>
-                <Link to='/issuer/login'>Login</Link> <br/>
-                <Link to='/issuer/register'>Register</Link>
+                    <h2>Issuer</h2>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/issuer/login'>Login</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/issuer/register'>Register</NavLink>
 
-                <h2>Other Options</h2>
-                <Link to='/search-certificate'>Search & Verify</Link> <br/> 
-                <Link to='/user-manual'>User Manual</Link> <br/>
-                <Link to='/'>Home</Link>
-            </nav>
+                    <h2>Other Options</h2>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/'>Home</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/search-certificate'>Search</NavLink>
+                    <NavLink className={({ isActive }) => isActive ? styles.active_navlink : styles.navlink} to='/user-manual'>User Manual</NavLink>
+                </nav>
+            </div>
         }
     </>;
 }
