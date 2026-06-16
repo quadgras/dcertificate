@@ -3,7 +3,7 @@ import styles from "./styles/dashboard_layout.module.css";
 
 export default function DashboardLayout({ nav_items, title, username, logoutHandlerURL}) {
     return <div className={styles.pagelayout}>
-        <div><Outlet /></div>
+        <div className={styles.content}><Outlet /></div>
         <nav className={styles.navbar}>
             {title} Account
             <h1>{username}</h1>

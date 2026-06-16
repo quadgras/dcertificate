@@ -1,25 +1,43 @@
-.pagelayout{
+.pagelayout {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 80% auto;
+    gap: 10px;
+    padding: 10px;
+    height: 100vh; /*calc(100vh - 20px); defining a height to layout so children can use 100%*/
+    box-sizing: border-box; 
 }
 
-.navbar{
+.navbar {
     display: flex;
     flex-direction: column;
     row-gap: 1pt;
-    background-color: rgb(227, 227, 227);
-    height:100vh;
+    background: linear-gradient(rgb(200, 228, 223), rgb(130, 155, 173));
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
-.navlink{
+.navlink {
     color: black;
     text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
 }
-.navlink:hover{
-    background-color: rgb(201, 201, 201);
+.navlink:hover {
+    background-color: rgba(256, 256, 256, 0.5);
 }
-.active_navlink{
+.active_navlink {
     background-color: rgb(75, 75, 75);
     color: white;
     text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.content {
+    /* background-color: red; */
+    overflow: scroll;
+    height: 100%;
+    box-sizing: border-box;
 }
