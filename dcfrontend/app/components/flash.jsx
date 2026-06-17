@@ -4,6 +4,9 @@ import { CircleAlert, CircleCheck, CircleX, Info } from "lucide-react";
 
 export default function FlashNotification(){
     const [flashData, setFlashData] = useState(null);
+
+    const [show, setShow] = useState(false);
+    const [shouldRender, setShouldRender] = useState(false);
     
     // This useEffect is set to run
     // only on component mount (with empty dependency array).
@@ -14,11 +17,12 @@ export default function FlashNotification(){
     useEffect(()=>{
         function handleFlashEvent(event){
             setFlashData(event.detail);
+            setShow(true);
 
             // following sets the flash to disappear
             // after a certain amount of time.
 
-            //setTimeout(()=>setFlashData(null), 10000);
+            // setTimeout(()=>setShow(false), 5000);
         }
 
         document.addEventListener('flash-event', handleFlashEvent);
@@ -29,12 +33,25 @@ export default function FlashNotification(){
     }, []);
 
     function dismiss(){
-        setFlashData(null);
+        // setFlashData(null);
+        setShow(false);
     }
 
+    function handleAnimationEnd(){
+        if(!show){
+            setShouldRender(false);
+            setFlashData(null);
+        }
+    }
+
+    useEffect(()=>{
+        if(show)
+            setShouldRender(true);
+    }, [show]);
+
     return(
-        flashData && (
-            <div className={styles.flash}>
+        shouldRender && (
+            <div className={`${styles.flash} ${show?styles.slideIn:styles.slideOut}`} onAnimationEnd={handleAnimationEnd}>
                 {flashData.map(notification => {
                     switch(notification.type){
                         case 'success': 

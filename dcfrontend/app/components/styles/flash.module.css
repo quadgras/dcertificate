@@ -5,6 +5,21 @@
   }
 }
 
+@keyframes slideUpFadeOut {
+  to {
+    opacity: 0%;
+    transform: translateY(-100px);
+  }
+}
+
+.slideIn {
+  animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slideOut {
+  animation: slideUpFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .flash {
   position: relative;
   top: 0;
@@ -14,7 +29,7 @@
   color: var(--accent-color);
   padding: 10px;
   z-index: 30;
-  animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* animation: slideDownFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; */
   /* --accent-background-alias: var(--accent-background);
   --accent-background-hover-alias: var(--accent-background-hover);
   --accent-color-alias: var(--accent-color); */
