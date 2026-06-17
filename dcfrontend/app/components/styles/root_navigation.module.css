@@ -1,6 +1,13 @@
 @keyframes slide_down{
     from {
-        transform: translateY(-10px);
+        transform: translateY(-20px);
+        opacity: 0%;
+    }
+}
+
+@keyframes slide_up{
+    to{
+        transform: translateY(-20px);
         opacity: 0%;
     }
 }
@@ -21,12 +28,19 @@
     background-color: rgba(0,0,0,0.9);
     color: white;
     z-index: 10;
-    animation: slide_down 0.25s linear forwards;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+
+.slideIn{
+    animation: slide_down 0.5s ease-out forwards;
+}
+
+.slideOut{
+    animation: slide_up 0.5s ease-out forwards;
 }
 
 .root_navigation{

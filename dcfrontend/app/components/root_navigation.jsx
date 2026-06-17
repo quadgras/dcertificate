@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./styles/root_navigation.module.css";
 import { NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 
 export default function RootNavigation() {
     const [open, set_open] = useState(false);
+    /* shouldRender is added to facilitate exit animation */
+    const [shouldRender, setShouldRender] = useState(false);
 
     function toggle() {
         set_open((last_state) => !last_state);
     }
 
+    function handleAnimationEnd() {
+        if(!open)
+            setShouldRender(false);
+    }
+
+    useEffect(()=>{
+        if(open)
+            setShouldRender(true);
+    },[open]);
+
     return <>
         <button className={styles.toggle} onClick={toggle}>
             {open ? <X /> : <Menu />}
         </button>
-        {open &&
-            <div className={styles.nav_container}>
+        {shouldRender &&
+            <div className={`${styles.nav_container} ${open?styles.slideIn:styles.slideOut}`} onAnimationEnd={handleAnimationEnd}>
                 <nav className={styles.root_navigation}>
                     {/* <h1>Menu</h1>
                     <hr style={{width:'300px'}} /> */}
